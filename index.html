@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ODRA — Clothing on the rail</title>
+<title>Indoware — Clothing on the rail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Anton&family=Caveat:wght@600&family=UnifrakturMaguntia&family=Yellowtail&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f2f2ea; --paper:#fafaf5; --ink:#1c1c1a; --muted:#77776f; --line:#d9d9cf;
-  --orange:#ff5a1f; --green:#1f9d5c; --blue:#e1ecf7; --blue-ink:#28455f;
+  --accent:#3346b0; --green:#1f9d5c; --blue:#e1ecf7; --blue-ink:#28455f;
   --rail:#9a9a92; --wood:#9b4b2c; --panel:#ebebe3;
   --font:"Archivo", "Helvetica Neue", Arial, sans-serif;
   box-sizing:border-box;
@@ -19,18 +19,18 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#191917; --paper:#20201d; --ink:#efefe8; --muted:#9a9a90; --line:#34342f;
-    --blue:#1d2a36; --blue-ink:#bcd3ea; --rail:#6c6c65; --panel:#262622;
+    --blue:#1d2a36; --blue-ink:#bcd3ea; --accent:#6577e8; --rail:#6c6c65; --panel:#262622;
   }
 }
 :root[data-theme="dark"]{
   --bg:#191917; --paper:#20201d; --ink:#efefe8; --muted:#9a9a90; --line:#34342f;
-  --blue:#1d2a36; --blue-ink:#bcd3ea; --rail:#6c6c65; --panel:#262622;
+  --blue:#1d2a36; --blue-ink:#bcd3ea; --accent:#6577e8; --rail:#6c6c65; --panel:#262622;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{height:100%; scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0; min-height:100%; background:var(--bg); color:var(--ink); font-family:var(--font); font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden}
 button{font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0}
-:focus-visible{outline:2px solid var(--orange); outline-offset:3px; border-radius:4px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
 img,svg{max-width:100%}
 
 /* ---------- header ---------- */
@@ -43,7 +43,7 @@ img,svg{max-width:100%}
 .logo svg{width:14px; height:22px}
 .bagbtn{display:flex; align-items:center; gap:8px; position:relative}
 .bagbtn svg{width:20px; height:20px}
-.badge{position:absolute; top:-6px; right:-8px; min-width:17px; height:17px; padding:0 4px; border-radius:9px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; display:grid; place-items:center; transform:scale(0); transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.badge{position:absolute; top:-6px; right:-8px; min-width:17px; height:17px; padding:0 4px; border-radius:9px; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:grid; place-items:center; transform:scale(0); transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
 .badge.on{transform:scale(1)}
 .badge.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
 @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.6)}100%{transform:scale(1)}}
@@ -61,6 +61,11 @@ img,svg{max-width:100%}
 .tabs{transition:opacity .4s; display:flex; gap:28px; font-size:12px; color:var(--muted); margin-bottom:26px}
 .tabs button{padding:4px 0; border-bottom:1px solid transparent; transition:color .2s,border-color .2s}
 .tabs button[aria-selected="true"]{color:var(--ink); border-color:var(--ink)}
+.cats{transition:opacity .4s; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:34px}
+.stage.focusing .cats{opacity:0; pointer-events:none}
+.cats button{padding:7px 16px; border:1px solid var(--line); border-radius:999px; background:var(--paper); font-size:12px; transition:background .2s,color .2s,border-color .2s}
+.cats button:hover{border-color:var(--accent)}
+.cats button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
 
 .rackwrap{position:relative; width:min(980px,100%); transition:filter .6s, opacity .6s, transform .6s cubic-bezier(.2,.8,.2,1)}
 .stage.focusing .rackwrap{filter:blur(10px); opacity:.45; transform:scale(.96)}
@@ -95,7 +100,7 @@ img,svg{max-width:100%}
 .explore svg{width:10px; height:10px}
 
 /* grid mode */
-.grid{display:none; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:18px; width:min(1000px,100%)}
+.grid{display:none; grid-template-columns:repeat(auto-fill,minmax(170px,220px)); justify-content:center; gap:18px; width:min(1000px,100%)}
 .stage.gridmode .grid{display:grid}
 .stage.gridmode .rackwrap{display:none}
 .tile{display:block; text-align:left; background:var(--paper); border-radius:14px; padding:16px 14px 14px; transition:transform .3s}
@@ -128,10 +133,10 @@ img,svg{max-width:100%}
 .sizes button:disabled{opacity:.35; text-decoration:line-through; cursor:not-allowed}
 .sizes.shake{animation:shake .4s}
 .slabel{font-size:11px; color:var(--muted); margin-top:12px}
-.sizes.need button:not(:disabled){border-color:var(--orange); animation:glow 1.2s ease-in-out infinite}
-@keyframes glow{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--orange) 22%,transparent)}}
+.sizes.need button:not(:disabled){border-color:var(--accent); animation:glow 1.2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}}
 @keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
-.hint{font-size:11px; color:var(--orange); height:16px}
+.hint{font-size:11px; color:var(--accent); height:16px}
 .factions{display:flex; justify-content:center; align-items:center; gap:22px; width:min(380px,92vw); margin-top:4px; font-size:13px; flex:0 0 auto}
 .factions .details{border-bottom:1px solid currentColor}
 .factions .add{flex:1; max-width:240px; height:44px; border-radius:999px; background:var(--green); color:#fff; font-weight:600; font-size:14px; transition:background .25s, transform .15s, filter .2s}
@@ -141,7 +146,7 @@ img,svg{max-width:100%}
 .focusing-on .closebtn{display:flex}
 
 /* marquee */
-.marquee{background:var(--orange); color:#fff; font-size:12px; overflow:hidden; white-space:nowrap; padding:9px 0}
+.marquee{background:var(--accent); color:#fff; font-size:12px; overflow:hidden; white-space:nowrap; padding:9px 0}
 .marquee .track{display:inline-flex; animation:scroll 32s linear infinite}
 .marquee span{padding:0 40px}
 @keyframes scroll{to{transform:translateX(-50%)}}
@@ -166,18 +171,18 @@ img,svg{max-width:100%}
 .pinfo h1{font-size:clamp(24px,3vw,32px); line-height:1.15; font-weight:600; margin:0 0 6px; letter-spacing:-.01em}
 .price{font-weight:700; font-size:16px; margin-bottom:14px}
 .desc{color:var(--muted); max-width:52ch; margin:0 0 10px}
-.sizeguide{color:var(--orange); font-size:13px; border-bottom:1px solid currentColor}
+.sizeguide{color:var(--accent); font-size:13px; border-bottom:1px solid currentColor}
 .field{margin-top:18px}
 .field label{display:block; font-size:12px; margin-bottom:6px}
 .select{position:relative}
 .select select{width:100%; appearance:none; font:inherit; color:inherit; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:11px 36px 11px 12px}
 .select.shake{animation:shake .4s}
-.select.need select{border-color:var(--orange)}
-.sizemsg{font-size:12px; color:var(--orange); max-height:0; overflow:hidden; transition:max-height .25s, margin .25s}
+.select.need select{border-color:var(--accent)}
+.sizemsg{font-size:12px; color:var(--accent); max-height:0; overflow:hidden; transition:max-height .25s, margin .25s}
 .sizemsg.on{max-height:20px; margin-top:4px}
 .select::after{content:""; position:absolute; right:14px; top:50%; width:7px; height:7px; border-right:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); transform:translateY(-70%) rotate(45deg); pointer-events:none}
 .stock{font-size:12px; color:var(--green); margin-top:8px; min-height:18px}
-.stock.out{color:var(--orange)}
+.stock.out{color:var(--accent)}
 .buyrow{display:flex; gap:12px; margin-top:12px; align-items:stretch}
 .qty{display:flex; align-items:center; border:1px solid var(--line); border-radius:8px; background:var(--paper)}
 .qty button{width:36px; height:44px; font-size:18px}
@@ -209,7 +214,7 @@ img,svg{max-width:100%}
 .toast .ck{flex:0 0 18px; height:18px; border-radius:50%; background:var(--ink); color:var(--bg); display:grid; place-items:center}
 .toast .ck svg{width:10px; height:10px}
 .toast .msg{flex:1}
-.toast .viewcart{background:var(--orange); color:#fff; border-radius:999px; padding:7px 14px; font-size:12px; font-weight:600; white-space:nowrap}
+.toast .viewcart{background:var(--accent); color:#fff; border-radius:999px; padding:7px 14px; font-size:12px; font-weight:600; white-space:nowrap}
 
 /* ---------- drawers ---------- */
 .scrim{position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.35); opacity:0; pointer-events:none; transition:opacity .35s}
@@ -233,10 +238,10 @@ img,svg{max-width:100%}
 .checkout{width:100%; height:46px; border-radius:999px; background:var(--ink); color:var(--bg); font-weight:600}
 .checkout:disabled{opacity:.3; cursor:not-allowed}
 .empty{text-align:center; color:var(--muted); padding:50px 0}
-.empty button{margin-top:12px; color:var(--orange); border-bottom:1px solid currentColor}
+.empty button{margin-top:12px; color:var(--accent); border-bottom:1px solid currentColor}
 .menu nav{display:flex; flex-direction:column; padding:20px 22px; gap:6px}
 .menu nav button{text-align:left; font-size:28px; font-weight:600; font-stretch:110%; padding:4px 0; transition:transform .25s, color .25s}
-.menu nav button:hover{transform:translateX(6px); color:var(--orange)}
+.menu nav button:hover{transform:translateX(6px); color:var(--accent)}
 .menu .small{padding:0 22px; font-size:12px; color:var(--muted)}
 
 /* ---------- bag + checkout pages ---------- */
@@ -251,13 +256,13 @@ img,svg{max-width:100%}
 .neg{color:var(--green)}
 .tax{margin-top:2px}
 .prog{height:6px; background:var(--line); border-radius:3px; overflow:hidden; margin:6px 0 14px}
-.prog i{display:block; height:100%; background:var(--orange); border-radius:3px; transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.prog i{display:block; height:100%; background:var(--accent); border-radius:3px; transition:width .8s cubic-bezier(.2,.8,.2,1)}
 .coupon{display:flex; gap:8px; margin-top:16px}
 .coupon input{flex:1; min-width:0; font:inherit; color:inherit; background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:9px 12px; text-transform:uppercase}
 .coupon button{padding:0 16px; border-radius:8px; border:1px solid var(--ink); font-size:13px; font-weight:600}
 .coupon.shake{animation:shake .4s}
 .cmsg{font-size:12px; color:var(--muted); margin-top:6px; min-height:18px}
-.cmsg.bad{color:var(--orange)}
+.cmsg.bad{color:var(--accent)}
 .cmsg .okc{color:var(--green)} .cmsg .okc button{color:var(--muted); border-bottom:1px solid currentColor; margin-left:4px}
 .bigbtn{width:100%; height:52px; border-radius:999px; background:var(--green); color:#fff; font-weight:600; font-size:15px; margin-top:16px; display:flex; align-items:center; justify-content:center; gap:10px; transition:filter .2s, transform .15s, opacity .2s}
 .bigbtn:hover{filter:brightness(1.07)} .bigbtn:active{transform:scale(.985)}
@@ -274,7 +279,7 @@ img,svg{max-width:100%}
 .crow .th{background:var(--panel); border-radius:10px; padding:8px; aspect-ratio:1; display:block}
 .crow .th svg{width:100%; height:100%; overflow:visible}
 .crow .cn{font-weight:600; text-align:left}
-.crow .cn:hover{color:var(--orange)}
+.crow .cn:hover{color:var(--accent)}
 .crow .rm{font-size:12px; color:var(--muted); border-bottom:1px solid var(--line); margin-top:6px}
 .crow .ct{text-align:right; font-weight:600}
 .stepper{display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:8px; background:var(--paper); justify-self:start}
@@ -304,14 +309,14 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
 .fld input,.fld select{width:100%; font:inherit; color:inherit; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:11px 12px; transition:border-color .2s, box-shadow .2s}
 .fld .select select{padding-right:36px}
 .fld input:focus,.fld select:focus{border-color:var(--ink); outline:none; box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 10%,transparent)}
-.fld .msg{font-size:12px; color:var(--orange); max-height:0; overflow:hidden; transition:max-height .25s, margin .25s}
-.fld.err input,.fld.err select{border-color:var(--orange)}
+.fld .msg{font-size:12px; color:var(--accent); max-height:0; overflow:hidden; transition:max-height .25s, margin .25s}
+.fld.err input,.fld.err select{border-color:var(--accent)}
 .fld.err .msg{max-height:34px; margin-top:4px}
 .fld .brand{position:absolute; right:10px; top:31px; font-size:10px; font-weight:800; letter-spacing:.04em; padding:3px 6px; border-radius:4px; background:var(--ink); color:var(--bg); opacity:0; transform:scale(.8); transition:opacity .2s, transform .2s}
 .fld .brand.on{opacity:1; transform:none}
 .chk{display:flex; gap:10px; align-items:flex-start; font-size:13px; margin-top:12px; cursor:pointer}
 .chk input{margin-top:3px; accent-color:var(--ink)}
-.tmsg{font-size:12px; color:var(--orange); min-height:18px; margin:4px 0 0 24px}
+.tmsg{font-size:12px; color:var(--accent); min-height:18px; margin:4px 0 0 24px}
 .opts{display:grid; gap:8px}
 .opt{display:flex; align-items:center; gap:12px; padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:var(--paper); cursor:pointer; transition:border-color .2s, box-shadow .2s}
 .opt:has(input:checked){border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
@@ -323,7 +328,7 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
 .collapse>div{overflow:hidden; min-height:0}
 .collapse.closed{grid-template-rows:0fr; opacity:0}
 .cardbox{padding-top:14px}
-.alert{background:color-mix(in srgb,var(--orange) 10%,var(--paper)); border:1px solid var(--orange); border-radius:10px; padding:12px 14px; font-size:13px; margin-bottom:18px}
+.alert{background:color-mix(in srgb,var(--accent) 10%,var(--paper)); border:1px solid var(--accent); border-radius:10px; padding:12px 14px; font-size:13px; margin-bottom:18px}
 .alert[hidden]{display:none}
 
 .ccard{width:min(300px,100%); aspect-ratio:1.586; perspective:1000px; margin:0 0 16px}
@@ -392,9 +397,9 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
 
 <header class="top" id="top">
   <div class="left"><button id="menuBtn" class="left" aria-label="Open menu"><span class="burger"><i></i><i></i><i></i></span><span class="t">Menu</span></button></div>
-  <button class="logo" id="logoBtn" aria-label="ODRA home">
+  <button class="logo" id="logoBtn" aria-label="Indoware home">
     <svg viewBox="0 0 14 22" aria-hidden="true"><path d="M7 21V8M7 8c0-4 4-3 4-6 0-1.2-1-2-2-2S7 .8 7 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M1 21h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-    ODRA
+    INDOWARE
   </button>
   <div class="right">
     <button class="bagbtn" id="bagBtn" aria-label="Open bag"><span class="t">Bag</span>
@@ -413,11 +418,12 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
         <button role="tab" aria-selected="true" data-mode="rail">On the rail</button>
         <button role="tab" aria-selected="false" data-mode="grid">Turn them around</button>
       </div>
+      <div class="cats" id="cats" role="group" aria-label="Category"></div>
 
       <div class="rackwrap">
         <div class="rail"></div>
         <div class="rack" id="rack"></div>
-        <div class="info" id="info"><div class="n">10 pieces on the rail</div><div class="s">Hover to turn a piece, click to look closer</div></div>
+        <div class="info" id="info"><div class="n"></div><div class="s">Hover to turn a piece, click to look closer</div></div>
         <div style="text-align:center"><button class="explore" id="exploreBtn">Explore pieces <svg viewBox="0 0 10 10"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
       </div>
 
@@ -452,7 +458,7 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
           <h1 id="pName"></h1>
           <div class="price" id="pPrice"></div>
           <p class="desc" id="pDesc"></p>
-          <p class="desc">Cut and sewn in Porto from organic cotton.</p>
+          <p class="desc">Tailored in small runs in our studio.</p>
           <button class="sizeguide" id="sizeGuide">Size guide</button>
           <div class="field"><label for="pSize">Size</label><div class="select"><select id="pSize"></select></div><div class="sizemsg" id="pSizeMsg" role="alert">Choose a size to add this to your cart.</div><div class="stock" id="pStock"></div></div>
           <div class="field"><label for="pQty">Quantity</label>
@@ -464,7 +470,7 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
           <div class="compare" id="pHelp"></div>
           <div class="delivery">
             <h3>Delivery options</h3>
-            <p><b>Courier delivery</b> within the EU takes 2–4 working days. Orders over 100 € ship free; below that it's 6 €.</p>
+            <p><b>Courier delivery</b> within the EU takes 2–4 working days. Orders over $100 ship free; below that it's $6.</p>
             <p><b>Studio pickup</b> in Porto is free. We'll message you when your order is ready, usually the same day.</p>
             <p><b>Returns</b> are free within 30 days on unworn pieces with tags attached.</p>
           </div>
@@ -496,150 +502,189 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
 <aside class="drawer cart" id="cart" aria-label="Cart">
   <div class="dhead">Your bag <button id="cartClose" aria-label="Close bag"><svg width="14" height="14" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
   <div class="dbody" id="cartBody"></div>
-  <div class="dfoot"><div class="subtotal"><span>Subtotal</span><span id="subtotal">0 €</span></div><div class="compare" id="shipNote" style="margin:-4px 0 12px"></div><div class="dbtns"><button class="ghost" id="viewBag">View bag</button><button class="checkout" id="checkout">Check out</button></div></div>
+  <div class="dfoot"><div class="subtotal"><span>Subtotal</span><span id="subtotal">$0</span></div><div class="compare" id="shipNote" style="margin:-4px 0 12px"></div><div class="dbtns"><button class="ghost" id="viewBag">View bag</button><button class="checkout" id="checkout">Check out</button></div></div>
 </aside>
 <aside class="drawer menu" id="menu" aria-label="Menu">
   <div class="dhead">Menu <button id="menuClose" aria-label="Close menu"><svg width="14" height="14" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
   <nav><button data-go="rail">The rail</button><button data-go="grid">All pieces</button><button data-go="cart">Your bag</button></nav>
-  <p class="small">ODRA is a small clothing studio. Every piece on the rail is made in runs of 60 or fewer.</p>
+  <p class="small">Indoware is a small clothing studio. Every piece on the rail is made in runs of 60 or fewer.</p>
 </aside>
 
 <script>
 /* ================= data ================= */
+const CATS = ['Casual blazers','Formal blazers','Indo western','Jodhpuri'];
 const P = [
-  {id:'blank', name:'Blank canvas tee', cat:'T-shirts', type:'tee', c:'#f3f2ee', cn:'Chalk', price:35, front:'logo', desc:'A heavyweight tee in undyed cotton with a small chest mark. Boxy through the body, slightly dropped at the shoulder.', out:['XS']},
-  {id:'night', name:'Night shift longsleeve', cat:'Longsleeves', type:'ls', c:'#232327', cn:'Ink', price:49, front:'logo', desc:'A fitted longsleeve in fine jersey with ribbed cuffs. Made for layering under everything else on the rail.', out:[]},
-  {id:'oat', name:'Oat tee', cat:'T-shirts', type:'tee', c:'#ebdfcd', cn:'Oat', price:35, front:null, desc:'Our everyday tee in a warm oat tone. Garment-dyed so every one comes out slightly different.', out:['XL']},
-  {id:'petal', name:'Petal crew', cat:'Sweatshirts', type:'sweat', c:'#eed6cf', cn:'Petal', price:79, front:'logo', desc:'A brushed-back crewneck sweatshirt in a soft blush, with ribbed hem, cuffs and collar.', out:[]},
-  {id:'forest', name:'Forest hoodie', cat:'Hoodies', type:'hood', c:'#1f7a4d', cn:'Forest', price:95, front:null, desc:'Midweight loopback hoodie with a lined hood and a deep kangaroo pocket. Our most-returned-to piece.', out:['XS','S']},
-  {id:'graphite', name:'Graphite hoodie', cat:'Hoodies', type:'hood', c:'#3b3c40', cn:'Graphite', price:95, front:'logo', desc:'The same hoodie in a washed charcoal that fades gently with every wash.', out:[]},
-  {id:'dune', name:'Dune crew', cat:'Sweatshirts', type:'sweat', c:'#f0e2cc', cn:'Dune', price:79, front:null, desc:'A relaxed crewneck in sand, cut a little longer in the body.', out:['XS']},
-  {id:'fortuna', name:'Fortuna — 15', cat:'Jerseys', type:'jersey', c:'#18181b', cn:'Black / pink', price:69, front:'gothic', back:'number', desc:'A mesh-panel football jersey with a blackletter chest print and a big 15 on the back. Breathable and slightly oversized.', out:[]},
-  {id:'comet', name:'Comet, oversize tee', cat:'T-shirts', type:'tee', c:'#3c3355', cn:'Dusk', price:45, front:'doodle', back:'small', desc:'An oversized tee in dusk purple with a hand-drawn comet on the chest and the line "go far, come back" underneath.', out:[]},
-  {id:'plum', name:'Plum longsleeve', cat:'Longsleeves', type:'ls', c:'#4b3c68', cn:'Plum', price:49, front:'logo', desc:'The fitted longsleeve in a deep plum. Pairs with the comet tee if you want to go all in.', out:['XL']},
+  {id:'navy-linen', name:'Navy linen blazer', cat:'Casual blazers', type:'casual', c:'#2c3a5a', cn:'Navy', inner:'#f3f2ee', price:149, desc:'An unlined linen blazer with soft shoulders and patch pockets. Throw it over a tee and roll the sleeves.', out:['XS']},
+  {id:'sand-cotton', name:'Sand cotton blazer', cat:'Casual blazers', type:'casual', c:'#cdb994', cn:'Sand', inner:'#2c3a5a', price:139, desc:'A washed cotton twill blazer in warm sand. Relaxed through the body, with a two-button front.', out:[]},
+  {id:'olive-knit', name:'Olive knit blazer', cat:'Casual blazers', type:'casual', c:'#5f6b45', cn:'Olive', inner:'#ebdfcd', price:159, desc:'A stretch jersey blazer that packs flat and never creases. Made for travel days.', out:['XL']},
+  {id:'charcoal-2b', name:'Charcoal two-button', cat:'Formal blazers', type:'formal', c:'#3a3c42', cn:'Charcoal', inner:'#f6f6f2', tieC:'#3346b0', sq:'#f6f6f2', price:229, desc:'A half-canvassed wool blazer with peak lapels, flap pockets and a single back vent.', out:[]},
+  {id:'midnight-peak', name:'Midnight peak lapel', cat:'Formal blazers', type:'formal', c:'#1b2140', cn:'Midnight', inner:'#f6f6f2', tieC:'#8a1f2c', sq:'#e7d9b0', price:249, desc:'Deep midnight wool with sharp peak lapels. Reads black at night and navy by day.', out:['XS','S']},
+  {id:'black-tux', name:'Black tuxedo jacket', cat:'Formal blazers', type:'formal', c:'#18181b', cn:'Black', inner:'#f6f6f2', tie:'bow', lapel:'#2e2e34', sq:'#f6f6f2', price:279, desc:'A one-button dinner jacket with satin-faced lapels. Pair it with a bow tie and nothing else to think about.', out:[]},
+  {id:'ivory-asym', name:'Ivory asymmetric', cat:'Indo western', type:'indo', c:'#ece3cf', cn:'Ivory', trim:'#b8933f', price:199, desc:'A long Indo-western jacket with an angled front closure and fine gold work along the placket and hem.', out:[]},
+  {id:'maroon-zari', name:'Maroon zari jacket', cat:'Indo western', type:'indo', c:'#6e1f2c', cn:'Maroon', trim:'#d8b35a', price:219, desc:'Rich maroon raw silk with zari detailing on the mandarin collar. Cut long with side slits for easy movement.', out:['XL']},
+  {id:'teal-silk', name:'Teal silk Indo western', cat:'Indo western', type:'indo', c:'#1f5f63', cn:'Teal', trim:'#d8b35a', price:209, desc:'A teal silk blend with a subtle sheen and a cross-over front. Made for sangeet nights.', out:['XS']},
+  {id:'royal-bandh', name:'Royal blue bandhgala', cat:'Jodhpuri', type:'jodh', c:'#26408f', cn:'Royal blue', trim:'#d8b35a', price:189, desc:'A classic closed-neck Jodhpuri in royal blue suiting, with a row of gold buttons and a short mandarin collar.', out:[]},
+  {id:'beige-bandh', name:'Beige Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#d8c7a6', cn:'Beige', trim:'#7a5a2a', price:179, desc:'Light beige linen-wool that works for daytime ceremonies. Antique bronze buttons down the front.', out:['XL']},
+  {id:'black-velvet', name:'Black velvet Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#1d1c21', cn:'Black velvet', trim:'#d8b35a', pipe:true, price:239, desc:'Plush black velvet with gold piping along the front edge. The one for the reception.', out:['S']},
 ];
 const SIZES = ['XS','S','M','L','XL'];
 
 /* ================= garment drawing ================= */
 let uid = 0;
 const BODY = {
-  tee:'M72 22 Q100 38 128 22 L170 38 L194 84 L163 97 L154 80 L156 214 Q100 220 44 214 L46 80 L37 97 L6 84 L30 38 Z',
-  jersey:'M74 22 L100 46 L126 22 L170 38 L194 84 L163 97 L154 80 L156 214 Q100 220 44 214 L46 80 L37 97 L6 84 L30 38 Z',
-  ls:'M72 22 Q100 38 128 22 L168 36 Q184 56 190 120 L196 198 L172 201 L158 104 L157 214 Q100 220 43 214 L42 104 L28 201 L4 198 L10 120 Q16 56 32 36 Z'
+  blazer:'M70 20 L100 28 L130 20 L170 32 Q184 50 188 120 L194 206 L172 209 L159 108 L160 212 Q100 218 40 212 L41 108 L28 209 L6 206 L12 120 Q16 50 30 32 Z',
+  indo:'M72 20 L100 28 L128 20 L168 32 Q182 50 186 120 L192 206 L170 209 L159 108 L162 224 Q100 230 38 224 L41 108 L30 209 L8 206 L14 120 Q18 50 32 32 Z'
 };
-BODY.sweat = BODY.ls; BODY.hood = BODY.ls;
+BODY.casual = BODY.blazer; BODY.formal = BODY.blazer; BODY.jodh = BODY.blazer;
 function dark(hex){ const n=parseInt(hex.slice(1),16); return ((n>>16)*.3+((n>>8)&255)*.59+(n&255)*.11) < 110; }
 function shadeHex(hex, amt){ let n=parseInt(hex.slice(1),16), r=n>>16, g=(n>>8)&255, b=n&255;
   const f=v=>Math.max(0,Math.min(255,Math.round(v+amt))); return '#'+((1<<24)+(f(r)<<16)+(f(g)<<8)+f(b)).toString(16).slice(1); }
+const btn = (x,y,fill,r=3.4) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="rgba(0,0,0,.25)" stroke-width=".8"/>`;
 
 function garment(p, face='front', hanger=true){
   const id = 'g'+(uid++), d = BODY[p.type], dk = dark(p.c);
-  const line = dk ? 'rgba(255,255,255,.10)' : 'rgba(0,0,0,.10)', deep = shadeHex(p.c,-28);
-  const print = dk ? '#f1efe8' : '#2a2a28';
+  const line = dk ? 'rgba(255,255,255,.10)' : 'rgba(0,0,0,.10)', deep = shadeHex(p.c,dk?-14:-28);
+  const edge = dk ? 'rgba(255,255,255,.22)' : 'rgba(0,0,0,.22)', trim = p.trim || deep;
+  const lapelled = p.type==='casual' || p.type==='formal';
   let s = `<svg viewBox="-10 -30 220 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
     <linearGradient id="${id}s" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
     <linearGradient id="${id}w" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b8653f"/><stop offset="1" stop-color="#7d3a20"/></linearGradient>
     <clipPath id="${id}c"><path d="${d}"/></clipPath></defs>`;
   if(hanger) s += `<path d="M100 18 V2 Q100 -16 113 -16 Q123 -16 121 -6" fill="none" stroke="#6f6f68" stroke-width="2.6" stroke-linecap="round"/>
     <path d="M42 34 Q100 10 158 34" fill="none" stroke="url(#${id}w)" stroke-width="7" stroke-linecap="round"/>`;
-  if(p.type==='hood' && face==='back') s += `<path d="M66 26 Q62 -6 100 -8 Q138 -6 134 26 Z" fill="${deep}"/>`;
   s += `<path d="${d}" fill="${p.c}"/>`;
   s += `<g clip-path="url(#${id}c)">`;
-  // folds
-  s += `<path d="M70 70 Q76 140 66 214 M132 66 Q124 150 136 214 M100 120 Q104 170 98 214" stroke="${line}" stroke-width="2" fill="none"/>`;
-  if(p.type==='jersey'){ // mesh side panels + raglan
-    s += `<path d="M30 38 L72 26 L60 90 L37 97 Z M170 38 L128 26 L140 90 L163 97 Z" fill="#e8418c" opacity=".55"/>
-          <path d="M46 100 V214 M154 100 V214" stroke="#e8418c" stroke-width="5"/>`;
-  }
-  if(p.type==='sweat' || p.type==='hood'){
-    s += `<rect x="30" y="200" width="140" height="16" fill="${deep}" opacity=".55"/>
-          <path d="M4 186 L28 189 M172 189 L196 186" stroke="${deep}" stroke-width="14" opacity=".55"/>`;
-  }
-  if(p.type==='hood' && face==='front'){
-    s += `<path d="M58 150 L142 150 L152 198 L48 198 Z" fill="none" stroke="${deep}" stroke-width="2.5"/>`;
-  }
-  // prints
+  // folds and cuffs
+  s += `<path d="M66 80 Q72 150 64 214 M134 80 Q128 150 136 214" stroke="${line}" stroke-width="2" fill="none"/>
+        <path d="M8 194 L29 197 M171 197 L192 194" stroke="${deep}" stroke-width="2"/>`;
   if(face==='front'){
-    if(p.front==='logo') s += `<text x="${p.type==='tee'?128:126}" y="72" font-family="Archivo,Arial" font-weight="900" font-size="9" fill="${print}" opacity=".8" text-anchor="middle" letter-spacing="1">ODRA</text>`;
-    if(p.front==='gothic') s += `<text x="100" y="104" font-family="UnifrakturMaguntia,serif" font-size="40" fill="#f6f4ee" text-anchor="middle">Fortuna</text><text x="100" y="122" font-family="Archivo,Arial" font-size="7" fill="#e8418c" text-anchor="middle" letter-spacing="2">PORTO FC</text><path d="M128 60 l5 -6 l5 6 l-5 6z" fill="#e8418c"/>`;
-    if(p.front==='doodle') s += `<g fill="none" stroke="#f1efe8" stroke-width="2.2" stroke-linecap="round">
-        <path d="M60 104 Q90 70 132 66"/><path d="M70 112 Q100 84 138 82"/><path d="M134 60 l8 6 -8 6 M140 58 l2 -6 M146 66 l6 -1"/>
-        <path d="M66 96 l-6 -6 M58 104 l-8 0"/></g>
-        <text x="102" y="148" font-family="Caveat,cursive" font-size="22" fill="#f1efe8" text-anchor="middle">go far,</text>
-        <text x="106" y="170" font-family="Caveat,cursive" font-size="22" fill="#f1efe8" text-anchor="middle">come back</text>`;
+    if(lapelled){
+      const formal = p.type==='formal', tux = p.tie==='bow';
+      s += `<path d="M78 20 L100 116 L122 20 Z" fill="${p.inner}"/>`;
+      if(formal){
+        s += `<path d="M86 20 L100 34 L114 20" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>`;
+        s += tux ? `<path d="M89 30 L100 35 L111 30 L111 42 L100 37 L89 42 Z" fill="#141416"/>`
+                 : `<path d="M97 32 L103 32 L105 40 L103.5 82 L100 88 L96.5 82 L95 40 Z" fill="${p.tieC}"/>`;
+      }
+      // lapels: notch for casual, peak for formal
+      const L = formal ? 'M78 20 L66 30 L50 46 L70 60 L100 116 Z' : 'M78 20 L66 30 L60 56 L70 60 L100 116 Z';
+      const lap = p.lapel || deep;
+      s += `<path d="${L}" fill="${lap}" stroke="${edge}" stroke-width="1"/><path d="${L}" transform="translate(200 0) scale(-1 1)" fill="${lap}" stroke="${edge}" stroke-width="1"/>`;
+      s += `<path d="M66 30 L70 46 M134 30 L130 46" stroke="${edge}" stroke-width="1.2"/>`;
+      s += `<path d="M100 116 V214" stroke="${edge}" stroke-width="1.4"/>`;
+      s += (tux ? [126] : [126,152]).map(y=>btn(100,y,deep)).join('');
+      if(formal){
+        s += `<path d="M48 152 h38 v8 h-38z M114 152 h38 v8 h-38z M116 82 L142 78 v5 L116 87 z" fill="${deep}" stroke="${edge}" stroke-width=".8"/>
+              <path d="M119 82 L124 72 L130 79 L136 71 L140 79 Z" fill="${p.sq}"/>`;
+      } else {
+        s += `<rect x="50" y="146" width="36" height="32" rx="5" fill="none" stroke="${deep}" stroke-width="2.2"/><rect x="114" y="146" width="36" height="32" rx="5" fill="none" stroke="${deep}" stroke-width="2.2"/>
+              <path d="M116 84 L142 80" stroke="${deep}" stroke-width="3"/>`;
+      }
+    }
+    if(p.type==='jodh'){
+      s += `<path d="M100 28 V214" stroke="${p.pipe?trim:edge}" stroke-width="${p.pipe?2:1.4}"/>`;
+      s += [46,72,98,124,150,176].map(y=>btn(100,y,trim,3.2)).join('');
+      s += `<path d="M116 82 L142 78 v5 L116 87 z M48 156 h38 v7 h-38z M114 156 h38 v7 h-38z" fill="${deep}" stroke="${edge}" stroke-width=".8"/>`;
+    }
+    if(p.type==='indo'){
+      s += `<path d="M108 28 Q124 56 126 100 L126 230" stroke="${edge}" stroke-width="1.6" fill="none"/>
+            <path d="M112 30 Q128 58 130 100 L130 230" stroke="${trim}" stroke-width="2.4" stroke-dasharray="1 5" stroke-linecap="round" fill="none"/>`;
+      s += [[113,42],[120,60],[124,80],[126,104],[126,130],[126,156],[126,182]].map(([x,y])=>btn(x,y,trim,3)).join('');
+      s += `<path d="M42 196 V230 M158 196 V230" stroke="${deep}" stroke-width="2"/>`;
+    }
   } else {
-    if(p.back==='number') s += `<text x="100" y="72" font-family="Yellowtail,cursive" font-size="24" fill="#e8418c" text-anchor="middle">Fortuna</text><text x="100" y="176" font-family="Anton,Impact,sans-serif" font-size="100" fill="#f6f4ee" text-anchor="middle">15</text>`;
-    if(p.back==='small') s += `<text x="100" y="60" font-family="Caveat,cursive" font-size="15" fill="#f1efe8" text-anchor="middle">come back soon</text>`;
-    s += `<path d="M76 24 Q100 30 124 24" stroke="${deep}" stroke-width="3" fill="none"/>`;
+    s += `<path d="M100 28 V214" stroke="${edge}" stroke-width="1.2"/>`;
+    if(lapelled) s += `<path d="M100 178 V214" stroke="${deep}" stroke-width="2.4"/><path d="M74 20 Q100 30 126 20" stroke="${deep}" stroke-width="6" fill="none"/>`;
+    if(p.type==='indo') s += `<path d="M42 196 V230 M158 196 V230" stroke="${deep}" stroke-width="2"/>`;
   }
+  if(p.type==='indo') s += `<path d="M38 218 Q100 225 162 218" stroke="${trim}" stroke-width="3" stroke-dasharray="1 5" stroke-linecap="round" fill="none"/>`;
   s += `<path d="${d}" fill="url(#${id}s)"/></g>`;
-  // collar & hood
-  if(face==='front'){
-    if(p.type==='jersey') s += `<path d="M74 22 L100 46 L126 22" stroke="#e8418c" stroke-width="4" fill="none"/>`;
-    else if(p.type==='hood') s += `<path d="M66 28 Q60 -6 100 -8 Q140 -6 134 28 Q120 46 100 48 Q80 46 66 28 Z" fill="${p.c}"/><path d="M66 28 Q60 -6 100 -8 Q140 -6 134 28 Q120 46 100 48 Q80 46 66 28 Z" fill="url(#${id}s)"/><path d="M80 28 Q84 6 100 6 Q116 6 120 28 Q110 40 100 40 Q90 40 80 28 Z" fill="${deep}"/><path d="M90 42 L87 86 M110 42 L113 86" stroke="#f3f2ee" stroke-width="2" stroke-linecap="round"/>`;
-    else s += `<path d="M72 22 Q100 38 128 22" stroke="${deep}" stroke-width="${p.type==='sweat'?6:3.5}" fill="none"/>`;
+  // mandarin collar
+  if(p.type==='jodh' || p.type==='indo'){
+    s += `<path d="M74 18 Q100 26 126 18 L125 27 Q100 35 75 27 Z" fill="${deep}" stroke="${p.type==='indo'||p.pipe?trim:edge}" stroke-width="1.2"/>`;
+    if(face==='front') s += `<path d="M${p.type==='indo'?108:100} 25 V34" stroke="${edge}" stroke-width="1.4"/>`;
   }
   return s + '</svg>';
 }
 function sideView(p){
-  const id='g'+(uid++), deep=shadeHex(p.c,-30), long = p.type!=='tee'&&p.type!=='jersey';
+  const id='g'+(uid++), deep=shadeHex(p.c,-30), h = p.type==='indo' ? 226 : 212;
+  const collar = p.type==='jodh' || p.type==='indo';
   return `<svg viewBox="0 -30 40 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="${shadeHex(p.c,18)}"/><stop offset=".5" stop-color="${p.c}"/><stop offset="1" stop-color="${deep}"/></linearGradient></defs>
     <path d="M20 18 V2 Q20 -16 30 -16 Q38 -16 36 -6" fill="none" stroke="#6f6f68" stroke-width="2.6" stroke-linecap="round"/>
     <rect x="15" y="15" width="10" height="9" rx="2" fill="#8c4426"/>
-    ${p.type==='hood'?`<path d="M11 26 Q7 2 20 0 Q32 2 29 26 Z" fill="${deep}"/>`:''}
-    <path d="M13 20 Q20 16 27 20 L30 70 L33 214 Q20 219 7 214 L10 70 Z" fill="url(#${id})"/>
-    <path d="M26 30 Q32 ${long?110:60} 29 ${long?196:96}" stroke="rgba(0,0,0,.18)" stroke-width="2" fill="none"/>
-    ${p.type==='jersey'?'<path d="M10 100 V212" stroke="#e8418c" stroke-width="3"/>':''}
+    <path d="M12 22 Q20 17 28 22 L31 70 L34 ${h} Q20 ${h+5} 6 ${h} L9 70 Z" fill="url(#${id})"/>
+    ${collar?`<rect x="13" y="16" width="14" height="8" rx="2" fill="${deep}"/>`:''}
+    <path d="M26 30 Q32 110 29 ${h-16}" stroke="rgba(0,0,0,.18)" stroke-width="2" fill="none"/>
+    ${p.trim?`<path d="M14 40 V${h-6}" stroke="${p.trim}" stroke-width="1.6" stroke-dasharray="1 5" stroke-linecap="round"/>`:''}
   </svg>`;
 }
 
 /* ================= helpers ================= */
 const $ = s => document.querySelector(s);
-const eur = n => n.toFixed(0)+' €';
+const usd = n => '$'+n.toFixed(0);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function retrigger(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
 /* ================= rack ================= */
 const rack = $('#rack'), info = $('#info'), stage = $('#stage');
-let active = null;
-P.forEach((p,i)=>{
-  const b = document.createElement('button');
-  b.className='slot'; b.setAttribute('aria-label', p.name+', '+eur(p.price));
-  b.innerHTML = `<span class="g"><span class="side">${sideView(p)}</span><span class="front">${garment(p)}</span></span>`;
-  b.addEventListener('mouseenter',()=>setActive(i));
-  b.addEventListener('focus',()=>setActive(i));
-  b.addEventListener('click',()=>openFocus(i));
-  rack.appendChild(b);
-});
-const slots=[...rack.children];
+let active = null, slots = [], shown = [], cat = CATS[0];
+const cats = $('#cats');
+cats.innerHTML = CATS.map(c=>`<button aria-pressed="${c===cat}">${c}</button>`).join('');
+cats.querySelectorAll('button').forEach(b=>b.onclick=()=>setCat(b.textContent));
+function setCat(c){
+  if(c===cat) return; cat=c;
+  cats.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', b.textContent===c));
+  renderRail(true);
+}
+function idleInfo(){
+  info.querySelector('.n').textContent=`${shown.length} ${cat.toLowerCase()} on the rail`;
+  info.querySelector('.s').textContent='Hover to turn a piece, click to look closer';
+}
+function renderRail(animate){
+  shown = P.map((_,i)=>i).filter(i=>P[i].cat===cat);
+  active = null; rack.innerHTML=''; grid.innerHTML='';
+  shown.forEach((i,k)=>{
+    const p=P[i], b=document.createElement('button');
+    b.className='slot'; b.setAttribute('aria-label', p.name+', '+usd(p.price));
+    b.innerHTML = `<span class="g"><span class="side">${sideView(p)}</span><span class="front">${garment(p)}</span></span>`;
+    b.addEventListener('mouseenter',()=>setActive(k));
+    b.addEventListener('focus',()=>setActive(k));
+    b.addEventListener('click',()=>openFocus(i));
+    rack.appendChild(b);
+    grid.appendChild(tile(p,()=>openPDP(i)));
+  });
+  slots=[...rack.children];
+  if(animate) slots.forEach(x=>retrigger(x,'swing'));
+  idleInfo();
+}
 rack.addEventListener('mouseleave',()=>setActive(null));
-function setActive(i){
-  if(i===active) return;
+function setActive(k){
+  if(k===active) return;
   if(active!=null) slots[active].classList.remove('active');
-  active=i;
+  active=k;
   info.classList.add('swap');
   setTimeout(()=>{
-    const n=info.querySelector('.n'), s=info.querySelector('.s');
-    if(i==null){ n.textContent='10 pieces on the rail'; s.textContent='Hover to turn a piece, click to look closer'; }
-    else { n.textContent=P[i].name; s.textContent=`${P[i].cat.replace(/s$/,'')} in ${P[i].cn.toLowerCase()}, ${eur(P[i].price)}`; }
+    const n=info.querySelector('.n'), s=info.querySelector('.s'), p=P[shown[k]];
+    if(k==null) idleInfo();
+    else { n.textContent=p.name; s.textContent=`${p.cat.replace(/s$/,'')} in ${p.cn.toLowerCase()}, ${usd(p.price)}`; }
     info.classList.remove('swap');
   },160);
-  if(i==null) return;
-  slots[i].classList.add('active');
-  retrigger(slots[i],'swing');
-  if(slots[i-1]) retrigger(slots[i-1],'nudgeL');
-  if(slots[i+1]) retrigger(slots[i+1],'nudgeR');
+  if(k==null) return;
+  slots[k].classList.add('active');
+  retrigger(slots[k],'swing');
+  if(slots[k-1]) retrigger(slots[k-1],'nudgeL');
+  if(slots[k+1]) retrigger(slots[k+1],'nudgeR');
 }
-$('#exploreBtn').onclick=()=>openFocus(active ?? 0);
+$('#exploreBtn').onclick=()=>openFocus(shown[active ?? 0]);
 
 /* tabs + grid */
 const grid=$('#grid');
 function tile(p, click){
   const t=document.createElement('button'); t.className='tile';
-  t.innerHTML=`<div class="flip"><div class="card"><div class="face front">${garment(p,'front')}</div><div class="face back">${garment(p,'back')}</div></div></div><div class="tn">${p.name}</div><div class="tp">${eur(p.price)}</div>`;
+  t.innerHTML=`<div class="flip"><div class="card"><div class="face front">${garment(p,'front')}</div><div class="face back">${garment(p,'back')}</div></div></div><div class="tn">${p.name}</div><div class="tp">${usd(p.price)}</div>`;
   t.onclick=click; return t;
 }
-P.forEach((p,i)=>grid.appendChild(tile(p,()=>openPDP(i))));
+renderRail();
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 function setMode(m){
   closeFocus();
@@ -648,7 +693,7 @@ function setMode(m){
 }
 
 /* marquee */
-const msgs=['Free shipping on orders over 100 €','◆','Cut and sewn in Porto','◆','Free returns within 30 days','◆','A new piece joins the rail every Friday','◆'];
+const msgs=['Free shipping on orders over $100','◆','Cut and sewn in Porto','◆','Free returns within 30 days','◆','A new piece joins the rail every Friday','◆'];
 $('#track').innerHTML=[...msgs,...msgs,...msgs,...msgs].map(m=>`<span>${m}</span>`).join('');
 
 /* ================= focus view ================= */
@@ -660,7 +705,7 @@ function sizeButtons(el, p, cb){
 function openFocus(i){
   fIdx=i; fSize=null; pendingAdd=false; $('#fSizes').classList.remove('need'); const p=P[i];
   $('#fFront').innerHTML=garment(p,'front'); $('#fBack').innerHTML=garment(p,'back');
-  $('#fCat').textContent=p.cat; $('#fName').textContent=p.name.toUpperCase(); $('#fSub').textContent=`${p.cn}, ${eur(p.price)}`;
+  $('#fCat').textContent=p.cat; $('#fName').textContent=p.name.toUpperCase(); $('#fSub').textContent=`${p.cn}, ${usd(p.price)}`;
   $('#fHint').textContent='';
   sizeButtons($('#fSizes'),p,s=>{ fSize=s; $('#fHint').textContent=''; $('#fSizes').classList.remove('need'); if(pendingAdd){ pendingAdd=false; focusAdd(); } });
   stage.classList.add('focusing'); document.body.classList.add('focusing-on'); $('#focus').setAttribute('aria-hidden','false');
@@ -726,13 +771,13 @@ function openPDP(i,preset){ pendingSize=preset||null; go('pdp',i); }
 function renderPDP(i){
   const preset=pendingSize; pendingSize=null;
   pIdx=i; const p=P[i]; pFace='front';
-  $('#pCat').textContent=p.cat; $('#pCatC').textContent=p.name; $('#pName').textContent=p.name; $('#pPrice').textContent=eur(p.price); $('#pDesc').textContent=p.desc;
+  $('#pCat').textContent=p.cat; $('#pCatC').textContent=p.name; $('#pName').textContent=p.name; $('#pPrice').textContent=usd(p.price); $('#pDesc').textContent=p.desc;
   $('#pPic').innerHTML=garment(p,'front',false); $('#pMain').classList.remove('zoom');
   $('#pThumbs').innerHTML=['front','back'].map(f=>`<button data-f="${f}" aria-pressed="${f==='front'}" aria-label="${f} view">${garment(p,f,false)}</button>`).join('');
   $('#pThumbs').querySelectorAll('button').forEach(b=>b.onclick=()=>setFace(b.dataset.f));
   $('#pSize').innerHTML='<option value="">Choose an option</option>'+SIZES.map(s=>`<option value="${s}" ${p.out.includes(s)?'disabled':''}>${s}${p.out.includes(s)?' (sold out)':''}</option>`).join('');
   $('#pSize').value=preset||''; $('#pQty').value=1; updateBuy();
-  $('#moreRow').innerHTML=''; P.filter((_,j)=>j!==i).slice(i%4,i%4+4).forEach(q=>$('#moreRow').appendChild(tile(q,()=>openPDP(P.indexOf(q)))));
+  $('#moreRow').innerHTML=''; [...P.filter(q=>q!==p && q.cat===p.cat), ...P.filter(q=>q.cat!==p.cat)].slice(0,4).forEach(q=>$('#moreRow').appendChild(tile(q,()=>openPDP(P.indexOf(q)))));
 }
 function setFace(f){
   if(f===pFace) return; pFace=f; const pic=$('#pPic');
@@ -771,12 +816,12 @@ $('#logoBtn').onclick=()=>{go('rack'); setMode('rail');};
 $('#sizeGuide').onclick=()=>toast('Our pieces run true to size. If you are between sizes, take the larger one.', false);
 
 /* ================= cart state ================= */
-const COUPONS={ODRA10:{pct:10,label:'ODRA10, 10% off'}, WELCOME5:{amt:5,label:'WELCOME5, 5 € off'}};
+const COUPONS={INDOWARE10:{pct:10,label:'INDOWARE10, 10% off'}, WELCOME5:{amt:5,label:'WELCOME5, $5 off'}};
 let cart=[], coupon=null, lastOrder=null, shipMethod='courier', payMethod='card', lastProg=0;
-try{ cart=JSON.parse(localStorage.getItem('odra-cart')||'[]').filter(l=>P.find(p=>p.id===l.id)); }catch(e){ cart=[]; }
-try{ coupon=localStorage.getItem('odra-coupon'); if(!COUPONS[coupon]) coupon=null; }catch(e){ coupon=null; }
-try{ lastOrder=JSON.parse(localStorage.getItem('odra-last-order')||'null'); }catch(e){ lastOrder=null; }
-function save(){ try{ localStorage.setItem('odra-cart',JSON.stringify(cart)); coupon?localStorage.setItem('odra-coupon',coupon):localStorage.removeItem('odra-coupon'); }catch(e){} }
+try{ cart=JSON.parse(localStorage.getItem('indoware-cart')||'[]').filter(l=>P.find(p=>p.id===l.id)); }catch(e){ cart=[]; }
+try{ coupon=localStorage.getItem('indoware-coupon'); if(!COUPONS[coupon]) coupon=null; }catch(e){ coupon=null; }
+try{ lastOrder=JSON.parse(localStorage.getItem('indoware-last-order')||'null'); }catch(e){ lastOrder=null; }
+function save(){ try{ localStorage.setItem('indoware-cart',JSON.stringify(cart)); coupon?localStorage.setItem('indoware-coupon',coupon):localStorage.removeItem('indoware-coupon'); }catch(e){} }
 const prod=id=>P.find(p=>p.id===id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const SHIP={courier:'Courier delivery', express:'Express delivery', pickup:'Studio pickup'};
@@ -787,10 +832,10 @@ function totals(method='courier'){
   return {count,sub,disc,after,ship,total:after+ship};
 }
 function trows(t,shipLabel){
-  return `<div class="trow"><span>Subtotal (${t.count} item${t.count===1?'':'s'})</span><span>${eur(t.sub)}</span></div>`+
-    (t.disc?`<div class="trow"><span>Discount</span><span class="neg">−${eur(t.disc)}</span></div>`:'')+
-    `<div class="trow"><span>${shipLabel}</span><span>${t.ship?eur(t.ship):'Free'}</span></div>`+
-    `<div class="trow total"><span>Total</span><span>${eur(t.total)}</span></div><div class="cm tax">Prices include VAT.</div>`;
+  return `<div class="trow"><span>Subtotal (${t.count} item${t.count===1?'':'s'})</span><span>${usd(t.sub)}</span></div>`+
+    (t.disc?`<div class="trow"><span>Discount</span><span class="neg">−${usd(t.disc)}</span></div>`:'')+
+    `<div class="trow"><span>${shipLabel}</span><span>${t.ship?usd(t.ship):'Free'}</span></div>`+
+    `<div class="trow total"><span>Total</span><span>${usd(t.total)}</span></div><div class="cm tax">Prices include VAT.</div>`;
 }
 function addToCart(p,size,qty){
   const l=cart.find(x=>x.id===p.id&&x.size===size);
@@ -807,11 +852,11 @@ function renderCart(bump){
   b.textContent=t.count; b.classList.toggle('on',t.count>0); if(bump&&t.count) retrigger(b,'pop');
   const body=$('#cartBody');
   if(!cart.length){ body.innerHTML='<div class="empty">Your bag is empty.<br><button id="emptyGo">Browse the rail</button></div>'; $('#emptyGo').onclick=()=>{ go('rack'); setMode('rail'); }; }
-  else body.innerHTML=cart.map((l,k)=>{const p=prod(l.id); return `<div class="line"><div class="th">${garment(p,'front',false)}</div><div><div class="ln">${p.name}</div><div class="lm">Size ${l.size}, ${eur(p.price)}</div><div class="lq"><button data-k="${k}" data-d="-1" aria-label="Decrease">−</button>${l.qty}<button data-k="${k}" data-d="1" aria-label="Increase">+</button></div></div><button class="rm" data-rm="${k}">Remove</button></div>`}).join('');
+  else body.innerHTML=cart.map((l,k)=>{const p=prod(l.id); return `<div class="line"><div class="th">${garment(p,'front',false)}</div><div><div class="ln">${p.name}</div><div class="lm">Size ${l.size}, ${usd(p.price)}</div><div class="lq"><button data-k="${k}" data-d="-1" aria-label="Decrease">−</button>${l.qty}<button data-k="${k}" data-d="1" aria-label="Increase">+</button></div></div><button class="rm" data-rm="${k}">Remove</button></div>`}).join('');
   body.querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>changeQty(+x.dataset.k,+x.dataset.d));
   body.querySelectorAll('[data-rm]').forEach(x=>x.onclick=()=>removeLine(+x.dataset.rm));
-  $('#subtotal').textContent=eur(t.after);
-  $('#shipNote').textContent = !cart.length ? '' : t.after>=100 ? 'Your order ships free.' : `Add ${eur(100-t.after)} more for free shipping.`;
+  $('#subtotal').textContent=usd(t.after);
+  $('#shipNote').textContent = !cart.length ? '' : t.after>=100 ? 'Your order ships free.' : `Add ${usd(100-t.after)} more for free shipping.`;
   $('#checkout').disabled=!cart.length;
   if(isOn('cart')) renderCartPage();
   if(isOn('checkout')){ if(!cart.length) go('cart'); else renderSummary(); }
@@ -831,17 +876,17 @@ function renderCartPage(){
     <div class="chead"><span>Product</span><span>Quantity</span><span>Total</span></div>
     ${cart.map((l,k)=>{const p=prod(l.id); return `<div class="crow" data-row="${k}">
       <button class="th" data-open="${p.id}" aria-label="View ${p.name}">${garment(p,'front',false)}</button>
-      <div><button class="cn" data-open="${p.id}">${p.name}</button><div class="cm">Size ${l.size}, ${p.cn}</div><div class="cm">${eur(p.price)} each</div><button class="rm" data-rm="${k}">Remove</button></div>
+      <div><button class="cn" data-open="${p.id}">${p.name}</button><div class="cm">Size ${l.size}, ${p.cn}</div><div class="cm">${usd(p.price)} each</div><button class="rm" data-rm="${k}">Remove</button></div>
       <div class="stepper"><button data-k="${k}" data-d="-1" aria-label="Decrease">−</button><span>${l.qty}</span><button data-k="${k}" data-d="1" aria-label="Increase">+</button></div>
-      <div class="ct">${eur(l.qty*p.price)}</div></div>`}).join('')}
+      <div class="ct">${usd(l.qty*p.price)}</div></div>`}).join('')}
     <button class="textlink" id="cpBack">Keep shopping</button>
   </div>
   <aside class="totals"><h2>Order summary</h2>
-    <div class="cm">${need?`Add ${eur(need)} more for free courier delivery.`:'Free courier delivery unlocked.'}</div>
+    <div class="cm">${need?`Add ${usd(need)} more for free courier delivery.`:'Free courier delivery unlocked.'}</div>
     <div class="prog"><i style="width:${lastProg}%"></i></div>
     ${trows(t,'Courier delivery (estimate)')}
     <form class="coupon" id="cpForm"><input id="cpIn" placeholder="Discount code" aria-label="Discount code" autocomplete="off"><button>Apply</button></form>
-    <div class="cmsg" id="cpMsg">${coupon?`<span class="okc">${COUPONS[coupon].label} applied.<button type="button" id="cpRm">Remove</button></span>`:'Have a code? Try ODRA10 for 10% off.'}</div>
+    <div class="cmsg" id="cpMsg">${coupon?`<span class="okc">${COUPONS[coupon].label} applied.<button type="button" id="cpRm">Remove</button></span>`:'Have a code? Try INDOWARE10 for 10% off.'}</div>
     <button class="bigbtn" id="cpCheckout">Proceed to checkout</button>
     <div class="secure"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>Secure checkout, free returns within 30 days</div>
   </aside></div>`;
@@ -873,7 +918,7 @@ $('#coForm').innerHTML=`
     ${fld('email','Email',{half:1,type:'email',ac:'email',ph:'you@example.com'})}${fld('phone','Phone',{half:1,type:'tel',ac:'tel',im:'tel'})}
   </div><label class="chk"><input type="checkbox" id="news"> Email me when a new piece joins the rail</label></fieldset>
   <fieldset><legend>Delivery</legend><div class="opts">
-    ${opt('ship','courier','Courier','2–4 working days','6 €',1)}${opt('ship','express','Express','Next working day','12 €')}${opt('ship','pickup','Studio pickup, Porto','Usually ready the same day','Free')}
+    ${opt('ship','courier','Courier','2–4 working days','$6',1)}${opt('ship','express','Express','Next working day','$12')}${opt('ship','pickup','Studio pickup, Porto','Usually ready the same day','Free')}
   </div></fieldset>
   <div class="collapse" id="addrBox"><div><fieldset><legend>Shipping address</legend><div class="fgrid">
     ${fld('addr','Street address',{ac:'address-line1'})}${fld('apt','Apartment, floor',{opt:1,ac:'address-line2'})}
@@ -970,18 +1015,18 @@ function syncCheckout(){
 document.querySelector('input[name="pay"][value="cash"]').id='pay-cash';
 function renderSummary(){
   const t=totals(shipMethod), base=totals('courier');
-  $('#ship-courier-p').textContent=base.ship?eur(base.ship):'Free';
+  $('#ship-courier-p').textContent=base.ship?usd(base.ship):'Free';
   $('#ship-courier-sub').textContent='Arrives by '+bizDays(4);
   $('#ship-express-sub').textContent='Arrives '+bizDays(1);
   $('#coSummary').innerHTML=`<h2>Order summary <button class="edit" id="editBag">Edit bag</button></h2>
-    <div class="slist">${cart.map(l=>{const p=prod(l.id); return `<div class="sline"><div class="th">${garment(p,'front',false)}<span class="q">${l.qty}</span></div><div><b>${p.name}</b><span class="cm">Size ${l.size}</span></div><span>${eur(l.qty*p.price)}</span></div>`}).join('')}</div>
+    <div class="slist">${cart.map(l=>{const p=prod(l.id); return `<div class="sline"><div class="th">${garment(p,'front',false)}<span class="q">${l.qty}</span></div><div><b>${p.name}</b><span class="cm">Size ${l.size}</span></div><span>${usd(l.qty*p.price)}</span></div>`}).join('')}</div>
     ${coupon?`<div class="cm" style="margin-bottom:6px">Code ${COUPONS[coupon].label}</div>`:''}
     ${trows(t,SHIP[shipMethod])}`;
   $('#editBag').onclick=()=>go('cart');
-  if(!$('#placeBtn').disabled) $('#placeBtn').textContent = payMethod==='card' ? `Pay ${eur(t.total)}` : `Place order, ${eur(t.total)}`;
+  if(!$('#placeBtn').disabled) $('#placeBtn').textContent = payMethod==='card' ? `Pay ${usd(t.total)}` : `Place order, ${usd(t.total)}`;
 }
 function renderCheckout(){
-  try{ const c=JSON.parse(localStorage.getItem('odra-customer')||'null');
+  try{ const c=JSON.parse(localStorage.getItem('indoware-customer')||'null');
     if(c) Object.entries(c).forEach(([k,v])=>{ const el=$('#'+k); if(el&&!el.value) el.value=v; }); }catch(e){}
   $('#coAlert').hidden=true;
   syncCheckout();
@@ -1012,9 +1057,9 @@ $('#coForm').addEventListener('submit',async e=>{
     customer
   };
   try{
-    localStorage.setItem('odra-last-order',JSON.stringify(lastOrder));
-    localStorage.setItem('odra-customer',JSON.stringify(customer));
-    const all=JSON.parse(localStorage.getItem('odra-orders')||'[]'); all.unshift(lastOrder); localStorage.setItem('odra-orders',JSON.stringify(all.slice(0,20)));
+    localStorage.setItem('indoware-last-order',JSON.stringify(lastOrder));
+    localStorage.setItem('indoware-customer',JSON.stringify(customer));
+    const all=JSON.parse(localStorage.getItem('indoware-orders')||'[]'); all.unshift(lastOrder); localStorage.setItem('indoware-orders',JSON.stringify(all.slice(0,20)));
   }catch(e){}
   ['cnum','cexp','ccvc','cname'].forEach(id=>$('#'+id).value='');
   $('#pvNum').textContent='•••• •••• •••• ••••'; $('#pvExp').textContent='MM/YY'; $('#pvName').textContent='Your name'; $('#pvCvc').textContent='•••';
@@ -1026,14 +1071,14 @@ $('#coForm').addEventListener('submit',async e=>{
 /* ---------- confirmation page ---------- */
 function renderDone(){
   const o=lastOrder, c=o.customer;
-  const where = o.ship==='pickup' ? 'ODRA studio, Rua das Flores 112, Porto. We’ll text you when it’s ready.'
+  const where = o.ship==='pickup' ? 'Indoware studio, Rua das Flores 112, Porto. We’ll text you when it’s ready.'
     : `${esc(c.fname)} ${esc(c.lname)}<br>${esc(c.addr)}${c.apt?', '+esc(c.apt):''}<br>${esc(c.postal)} ${esc(c.city)}, ${esc(c.country)}`;
   $('#donePage').innerHTML=`<div class="done-wrap">
     <svg class="bigcheck" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="36"/><path d="M24 41l11 11 21-23"/></svg>
     <h1 class="ptitle">Thanks, ${esc(c.fname)}. Your order is in.</h1>
     <p class="cm">Order <b>${o.no}</b>. A confirmation is on its way to ${esc(c.email)}.</p>
     <div class="receipt">
-      ${o.items.map(i=>{const p=prod(i.id); return `<div class="sline"><div class="th">${garment(p,'front',false)}<span class="q">${i.qty}</span></div><div><b>${esc(i.name)}</b><span class="cm">Size ${i.size}</span></div><span>${eur(i.qty*i.price)}</span></div>`}).join('')}
+      ${o.items.map(i=>{const p=prod(i.id); return `<div class="sline"><div class="th">${garment(p,'front',false)}<span class="q">${i.qty}</span></div><div><b>${esc(i.name)}</b><span class="cm">Size ${i.size}</span></div><span>${usd(i.qty*i.price)}</span></div>`}).join('')}
       <div style="margin-top:10px">${trows(o.totals,SHIP[o.ship])}</div>
       <div class="rgrid">
         <div><h3>${SHIP[o.ship]}</h3><p>${where}</p>${o.eta?`<p style="margin-top:6px">Expected ${o.eta}</p>`:''}</div>
