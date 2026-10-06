@@ -26,12 +26,15 @@ the `<script>` section. Each line is one product:
 - `name`, `cat` (category), `price`, `desc` (description)
 - `cat` must be one of the names in `CATS`: `Casual blazers`, `Formal blazers`,
   `Indo western` or `Jodhpuri`. These are the filter buttons above the rail.
-- `type`: `casual`, `formal`, `indo` or `jodh`, which sets how the piece is drawn
-- `c`: garment colour as a hex code, `cn`: colour name
-- Optional details: `inner` (shirt or tee colour under a blazer), `tieC` (tie
-  colour), `tie:'bow'`, `sq` (pocket square), `lapel`, `trim` (button and
-  embroidery colour), `pipe:true` (piping on a Jodhpuri)
+- `type`: `casual`, `formal`, `indo` or `jodh`
+- `c`: main colour as a hex code (used for the narrow side view on the rail),
+  `cn`: colour name
 - `out`: sizes that are sold out, for example `['XS','S']`
+
+Each product needs two photos in the `images` folder, named after its `id`:
+`images/<id>.webp` (front) and `images/<id>-back.webp` (back). Use a
+transparent background, a 4:5 shape (the current ones are 640 × 800) and show
+the piece on a hanger with the hook near the top, so it lines up on the rail.
 
 ## Going live
 

@@ -83,7 +83,7 @@ img,svg{max-width:100%}
 .slot .front{width:176px; margin-left:-88px; transform:scaleX(.14); opacity:0; transition:transform .6s cubic-bezier(.2,.8,.2,1), opacity .25s}
 .slot.active .side{transform:scaleX(3.5); opacity:0}
 .slot.active .front{transform:scaleX(1); opacity:1; transition-delay:.04s,.04s}
-.slot svg{display:block; width:100%; height:auto; overflow:visible; filter:drop-shadow(0 8px 10px rgba(0,0,0,.12))}
+.slot svg,.slot img{display:block; width:100%; height:auto; overflow:visible; filter:drop-shadow(0 8px 10px rgba(0,0,0,.12))}
 .slot.swing .g{animation:swing 1.1s cubic-bezier(.3,.6,.4,1)}
 .slot.nudgeL .g{animation:nudgeL .9s ease-out}
 .slot.nudgeR .g{animation:nudgeR .9s ease-out}
@@ -105,23 +105,23 @@ img,svg{max-width:100%}
 .stage.gridmode .rackwrap{display:none}
 .tile{display:block; text-align:left; background:var(--paper); border-radius:14px; padding:16px 14px 14px; transition:transform .3s}
 .tile:hover{transform:translateY(-3px)}
-.flip{position:relative; aspect-ratio:220/260; perspective:900px}
+.flip{position:relative; aspect-ratio:4/5; perspective:900px}
 .flip .card{position:absolute; inset:0; transform-style:preserve-3d; transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .tile:hover .flip .card,.tile:focus-visible .flip .card{transform:rotateY(180deg)}
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden}
 .face.back{transform:rotateY(180deg)}
-.face svg{width:100%; height:100%; overflow:visible; filter:drop-shadow(0 8px 10px rgba(0,0,0,.12))}
+.face img{width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 8px 10px rgba(0,0,0,.12))}
 .tile .tn{font-weight:700; font-size:13px; margin-top:10px}
 .tile .tp{font-size:12px; color:var(--muted)}
 
 /* focus overlay */
 .focus{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:safe center; padding:12px 16px 20px; overflow-y:auto; overscroll-behavior:contain; pointer-events:none; opacity:0; transition:opacity .4s}
 .stage.focusing .focus{opacity:1; pointer-events:auto}
-.spin{position:relative; flex:0 0 auto; height:clamp(130px, calc(100vh - 360px), 380px); height:clamp(130px, calc(100dvh - 360px), 380px); aspect-ratio:220/260; max-width:70vw; perspective:1100px; cursor:grab; touch-action:pan-y; transform:translateY(30px) scale(.8); transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.spin{position:relative; flex:0 0 auto; height:clamp(130px, calc(100vh - 360px), 380px); height:clamp(130px, calc(100dvh - 360px), 380px); aspect-ratio:4/5; max-width:70vw; perspective:1100px; cursor:grab; touch-action:pan-y; transform:translateY(30px) scale(.8); transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .spin:active{cursor:grabbing}
 .stage.focusing .spin{transform:none}
 .spin .card{position:absolute; inset:0; transform-style:preserve-3d}
-.spin .face svg{filter:drop-shadow(0 18px 22px rgba(0,0,0,.18))}
+.spin .face img{filter:drop-shadow(0 18px 22px rgba(0,0,0,.18))}
 .fmeta{text-align:center; margin-top:8px; flex:0 0 auto}
 .fcat{font-size:11px; color:var(--muted)}
 .fname{font-weight:500; font-stretch:125%; letter-spacing:.08em; font-size:clamp(18px,2.4vw,24px); margin:2px 0}
@@ -160,14 +160,14 @@ img,svg{max-width:100%}
 .gallery .main.zoom{cursor:zoom-out}
 .gallery .main .pic{width:62%; transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .3s}
 .gallery .main.zoom .pic{transform:scale(1.8)}
-.gallery .main .pic svg{width:100%; height:auto; overflow:visible; filter:drop-shadow(0 14px 18px rgba(0,0,0,.15))}
+.gallery .main .pic img{display:block; width:100%; height:auto; filter:drop-shadow(0 14px 18px rgba(0,0,0,.15))}
 .gallery .main .pic.fade{opacity:0}
 .zoomicon{position:absolute; top:14px; left:14px; width:30px; height:30px; border-radius:50%; background:var(--paper); display:grid; place-items:center}
 .zoomicon svg{width:14px; height:14px}
 .thumbs{display:flex; gap:10px; margin-top:12px}
 .thumbs button{width:74px; aspect-ratio:1; border-radius:10px; background:var(--panel); padding:8px; border:1.5px solid transparent; transition:border-color .2s}
 .thumbs button[aria-pressed="true"]{border-color:var(--ink)}
-.thumbs svg{width:100%; height:100%; overflow:visible}
+.thumbs img{width:100%; height:100%; object-fit:contain}
 .pinfo h1{font-size:clamp(24px,3vw,32px); line-height:1.15; font-weight:600; margin:0 0 6px; letter-spacing:-.01em}
 .price{font-weight:700; font-size:16px; margin-bottom:14px}
 .desc{color:var(--muted); max-width:52ch; margin:0 0 10px}
@@ -228,7 +228,7 @@ img,svg{max-width:100%}
 .dfoot{padding:18px 22px; border-top:1px solid var(--line)}
 .line{display:grid; grid-template-columns:64px 1fr auto; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); animation:viewin .4s}
 .line .th{background:var(--panel); border-radius:8px; padding:6px; aspect-ratio:1}
-.line .th svg{width:100%; height:100%; overflow:visible}
+.line .th img{width:100%; height:100%; object-fit:contain}
 .line .ln{font-weight:600; font-size:13px}
 .line .lm{font-size:12px; color:var(--muted)}
 .line .lq{display:flex; align-items:center; gap:10px; margin-top:6px; font-size:13px}
@@ -277,7 +277,7 @@ img,svg{max-width:100%}
 .crow{display:grid; grid-template-columns:84px minmax(0,1fr) 110px 80px; gap:16px; align-items:center; padding:16px 0; border-bottom:1px solid var(--line); transition:opacity .3s, transform .3s}
 .crow.leaving{opacity:0; transform:translateX(24px)}
 .crow .th{background:var(--panel); border-radius:10px; padding:8px; aspect-ratio:1; display:block}
-.crow .th svg{width:100%; height:100%; overflow:visible}
+.crow .th img{width:100%; height:100%; object-fit:contain}
 .crow .cn{font-weight:600; text-align:left}
 .crow .cn:hover{color:var(--accent)}
 .crow .rm{font-size:12px; color:var(--muted); border-bottom:1px solid var(--line); margin-top:6px}
@@ -346,7 +346,7 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
 
 .sline{display:grid; grid-template-columns:54px minmax(0,1fr) auto; gap:12px; align-items:center; padding:8px 0; font-size:13px}
 .sline .th{position:relative; background:var(--panel); border-radius:8px; padding:5px; aspect-ratio:1}
-.sline .th svg{width:100%; height:100%; overflow:visible}
+.sline .th img{width:100%; height:100%; object-fit:contain}
 .sline .q{position:absolute; top:-6px; right:-6px; background:var(--ink); color:var(--bg); font-size:10px; font-weight:700; border-radius:9px; min-width:18px; height:18px; display:grid; place-items:center}
 .sline b{display:block; font-weight:600}
 .slist{border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:10px}
@@ -515,140 +515,58 @@ form legend{font-weight:600; font-size:17px; margin-bottom:12px; padding:0}
 const CATS = ['Casual blazers','Formal blazers','Indo western','Jodhpuri'];
 const P = [
   // Casual blazers
-  {id:'navy-linen', name:'Navy linen blazer', cat:'Casual blazers', type:'casual', c:'#2c3a5a', cn:'Navy', inner:'#f3f2ee', price:149, desc:'An unlined linen blazer with soft shoulders and patch pockets. Throw it over a tee and roll the sleeves.', out:['XS']},
-  {id:'sand-cotton', name:'Sand cotton blazer', cat:'Casual blazers', type:'casual', c:'#cdb994', cn:'Sand', inner:'#2c3a5a', price:139, desc:'A washed cotton twill blazer in warm sand. Relaxed through the body, with a two-button front.', out:[]},
-  {id:'olive-knit', name:'Olive knit blazer', cat:'Casual blazers', type:'casual', c:'#5f6b45', cn:'Olive', inner:'#ebdfcd', price:159, desc:'A stretch jersey blazer that packs flat and never creases. Made for travel days.', out:['XL']},
-  {id:'grey-check', name:'Grey check blazer', cat:'Casual blazers', type:'casual', c:'#8a8d91', cn:'Grey check', inner:'#1c1c1a', check:true, price:169, desc:'A soft wool blend in a quiet windowpane check. Wear it with dark denim and a black tee.', out:[]},
-  {id:'rust-cord', name:'Rust corduroy blazer', cat:'Casual blazers', type:'casual', c:'#9b4b2c', cn:'Rust', inner:'#ebdfcd', price:159, desc:'Fine-wale corduroy in a warm rust, with patch pockets and a single back vent.', out:['S']},
-  {id:'cream-summer', name:'Cream summer blazer', cat:'Casual blazers', type:'casual', c:'#ece6d6', cn:'Cream', inner:'#3346b0', btns:1, price:149, desc:'A one-button cotton-linen blazer for warm evenings. Light enough to wear all day.', out:[]},
-  {id:'denim-blazer', name:'Washed denim blazer', cat:'Casual blazers', type:'casual', c:'#4a6a8f', cn:'Washed indigo', inner:'#f3f2ee', price:129, desc:'Indigo denim washed soft, cut like a tailored blazer. It fades a little more with every wear.', out:['XL']},
-  {id:'brown-tweed', name:'Brown tweed blazer', cat:'Casual blazers', type:'casual', c:'#6b5038', cn:'Tobacco', inner:'#ebdfcd', check:true, btns:3, price:189, desc:'A three-button tweed blazer in tobacco brown with a subtle overcheck. Made for cold mornings.', out:[]},
-  {id:'black-jersey', name:'Black jersey blazer', cat:'Casual blazers', type:'casual', c:'#232327', cn:'Black', inner:'#8a8d91', pocket:'flap', price:155, desc:'A sharp black blazer in comfortable jersey, with flap pockets that keep it looking dressed up.', out:['XS']},
-  {id:'sky-seersucker', name:'Sky seersucker blazer', cat:'Casual blazers', type:'casual', c:'#a9c1d9', cn:'Sky', inner:'#f3f2ee', price:145, desc:'Puckered cotton seersucker in pale sky blue. It breathes in the heat and never needs ironing.', out:[]},
+  {id:'navy-linen', name:'Navy linen blazer', cat:'Casual blazers', type:'casual', c:'#2c3a5a', cn:'Navy', price:149, desc:'An unlined linen blazer with soft shoulders and patch pockets. Throw it over a tee and roll the sleeves.', out:['XS']},
+  {id:'sand-cotton', name:'Sand cotton blazer', cat:'Casual blazers', type:'casual', c:'#cdb994', cn:'Sand', price:139, desc:'A washed cotton twill blazer in warm sand. Relaxed through the body, with a two-button front.', out:[]},
+  {id:'olive-knit', name:'Olive knit blazer', cat:'Casual blazers', type:'casual', c:'#5f6b45', cn:'Olive', price:159, desc:'A stretch jersey blazer that packs flat and never creases. Made for travel days.', out:['XL']},
+  {id:'grey-check', name:'Grey check blazer', cat:'Casual blazers', type:'casual', c:'#8a8d91', cn:'Grey check', price:169, desc:'A soft wool blend in a quiet windowpane check. Wear it with dark denim and a black tee.', out:[]},
+  {id:'rust-cord', name:'Rust corduroy blazer', cat:'Casual blazers', type:'casual', c:'#9b4b2c', cn:'Rust', price:159, desc:'Fine-wale corduroy in a warm rust, with patch pockets and a single back vent.', out:['S']},
+  {id:'cream-summer', name:'Cream summer blazer', cat:'Casual blazers', type:'casual', c:'#ece6d6', cn:'Cream', price:149, desc:'A one-button cotton-linen blazer for warm evenings. Light enough to wear all day.', out:[]},
+  {id:'denim-blazer', name:'Washed denim blazer', cat:'Casual blazers', type:'casual', c:'#4a6a8f', cn:'Washed indigo', price:129, desc:'Indigo denim washed soft, cut like a tailored blazer. It fades a little more with every wear.', out:['XL']},
+  {id:'brown-tweed', name:'Brown tweed blazer', cat:'Casual blazers', type:'casual', c:'#6b5038', cn:'Tobacco', price:189, desc:'A three-button tweed blazer in tobacco brown with a subtle overcheck. Made for cold mornings.', out:[]},
+  {id:'black-jersey', name:'Black jersey blazer', cat:'Casual blazers', type:'casual', c:'#232327', cn:'Black', price:155, desc:'A sharp black blazer in comfortable jersey, with flap pockets that keep it looking dressed up.', out:['XS']},
+  {id:'sky-seersucker', name:'Sky seersucker blazer', cat:'Casual blazers', type:'casual', c:'#a9c1d9', cn:'Sky', price:145, desc:'Puckered cotton seersucker in pale sky blue. It breathes in the heat and never needs ironing.', out:[]},
   // Formal blazers
-  {id:'charcoal-2b', name:'Charcoal two-button', cat:'Formal blazers', type:'formal', c:'#3a3c42', cn:'Charcoal', inner:'#f6f6f2', tieC:'#3346b0', sq:'#f6f6f2', price:229, desc:'A half-canvassed wool blazer with peak lapels, flap pockets and a single back vent.', out:[]},
-  {id:'midnight-peak', name:'Midnight peak lapel', cat:'Formal blazers', type:'formal', c:'#1b2140', cn:'Midnight', inner:'#f6f6f2', tieC:'#8a1f2c', sq:'#e7d9b0', price:249, desc:'Deep midnight wool with sharp peak lapels. Reads black at night and navy by day.', out:['XS','S']},
-  {id:'black-tux', name:'Black tuxedo jacket', cat:'Formal blazers', type:'formal', c:'#18181b', cn:'Black', inner:'#f6f6f2', tie:'bow', lapel:'#2e2e34', sq:'#f6f6f2', price:279, desc:'A one-button dinner jacket with satin-faced lapels. Pair it with a bow tie and nothing else to think about.', out:[]},
-  {id:'navy-db', name:'Navy double-breasted', cat:'Formal blazers', type:'formal', c:'#22305a', cn:'Navy', inner:'#f6f6f2', tieC:'#b8933f', sq:'#f6f6f2', dbl:true, price:269, desc:'A six-button double-breasted blazer in navy wool. Cut close to the body with strong shoulders.', out:['XL']},
-  {id:'ivory-dinner', name:'Ivory dinner jacket', cat:'Formal blazers', type:'formal', c:'#efe9dc', cn:'Ivory', inner:'#f6f6f2', tie:'bow', lapel:'#e3dccb', price:289, desc:'A one-button ivory dinner jacket for summer weddings and black-tie evenings.', out:[]},
-  {id:'grey-pinstripe', name:'Grey windowpane blazer', cat:'Formal blazers', type:'formal', c:'#5b5e66', cn:'Mid grey', inner:'#e1ecf7', tieC:'#1b2140', check:true, price:239, desc:'Mid-grey worsted wool with a faint windowpane. A business blazer that still has some character.', out:[]},
-  {id:'wine-velvet', name:'Wine velvet blazer', cat:'Formal blazers', type:'formal', c:'#5a1a2a', cn:'Wine', inner:'#f6f6f2', tie:'bow', lapel:'#4a1522', sq:'#d8b35a', price:299, desc:'Cotton velvet in deep wine with a one-button front. Made for parties and late dinners.', out:['S']},
-  {id:'black-db', name:'Black double-breasted', cat:'Formal blazers', type:'formal', c:'#1d1d21', cn:'Black', inner:'#f6f6f2', tieC:'#3a3c42', dbl:true, price:279, desc:'A double-breasted black wool blazer with peak lapels. Sharp enough for any formal event.', out:[]},
-  {id:'steel-3b', name:'Steel blue three-button', cat:'Formal blazers', type:'formal', c:'#3f5873', cn:'Steel blue', inner:'#f6f6f2', tieC:'#8a1f2c', sq:'#f6f6f2', btns:3, price:235, desc:'A three-button blazer in steel blue wool, with a higher closure that frames the tie.', out:['XS']},
-  {id:'camel-formal', name:'Camel wool blazer', cat:'Formal blazers', type:'formal', c:'#b08a5a', cn:'Camel', inner:'#f6f6f2', tieC:'#22305a', sq:'#f6f6f2', price:245, desc:'Brushed camel wool with peak lapels. A warm alternative to grey and navy.', out:[]},
+  {id:'charcoal-2b', name:'Charcoal two-button', cat:'Formal blazers', type:'formal', c:'#3a3c42', cn:'Charcoal', price:229, desc:'A half-canvassed wool blazer with peak lapels, flap pockets and a single back vent.', out:[]},
+  {id:'midnight-peak', name:'Midnight peak lapel', cat:'Formal blazers', type:'formal', c:'#1b2140', cn:'Midnight', price:249, desc:'Deep midnight wool with sharp peak lapels. Reads black at night and navy by day.', out:['XS','S']},
+  {id:'black-tux', name:'Black tuxedo jacket', cat:'Formal blazers', type:'formal', c:'#18181b', cn:'Black', price:279, desc:'A one-button dinner jacket with satin-faced lapels. Pair it with a bow tie and nothing else to think about.', out:[]},
+  {id:'navy-db', name:'Navy double-breasted', cat:'Formal blazers', type:'formal', c:'#22305a', cn:'Navy', price:269, desc:'A six-button double-breasted blazer in navy wool. Cut close to the body with strong shoulders.', out:['XL']},
+  {id:'ivory-dinner', name:'Ivory dinner jacket', cat:'Formal blazers', type:'formal', c:'#efe9dc', cn:'Ivory', price:289, desc:'A one-button ivory dinner jacket for summer weddings and black-tie evenings.', out:[]},
+  {id:'grey-pinstripe', name:'Grey windowpane blazer', cat:'Formal blazers', type:'formal', c:'#5b5e66', cn:'Mid grey', price:239, desc:'Mid-grey worsted wool with a faint windowpane. A business blazer that still has some character.', out:[]},
+  {id:'wine-velvet', name:'Wine velvet blazer', cat:'Formal blazers', type:'formal', c:'#5a1a2a', cn:'Wine', price:299, desc:'Cotton velvet in deep wine with a one-button front. Made for parties and late dinners.', out:['S']},
+  {id:'black-db', name:'Black double-breasted', cat:'Formal blazers', type:'formal', c:'#1d1d21', cn:'Black', price:279, desc:'A double-breasted black wool blazer with peak lapels. Sharp enough for any formal event.', out:[]},
+  {id:'steel-3b', name:'Steel blue three-button', cat:'Formal blazers', type:'formal', c:'#3f5873', cn:'Steel blue', price:235, desc:'A three-button blazer in steel blue wool, with a higher closure that frames the tie.', out:['XS']},
+  {id:'camel-formal', name:'Camel wool blazer', cat:'Formal blazers', type:'formal', c:'#b08a5a', cn:'Camel', price:245, desc:'Brushed camel wool with peak lapels. A warm alternative to grey and navy.', out:[]},
   // Indo western
-  {id:'ivory-asym', name:'Ivory asymmetric', cat:'Indo western', type:'indo', c:'#ece3cf', cn:'Ivory', trim:'#b8933f', price:199, desc:'A long Indo-western jacket with an angled front closure and fine gold work along the placket and hem.', out:[]},
-  {id:'maroon-zari', name:'Maroon zari jacket', cat:'Indo western', type:'indo', c:'#6e1f2c', cn:'Maroon', trim:'#d8b35a', price:219, desc:'Rich maroon raw silk with zari detailing on the mandarin collar. Cut long with side slits for easy movement.', out:['XL']},
-  {id:'teal-silk', name:'Teal silk Indo western', cat:'Indo western', type:'indo', c:'#1f5f63', cn:'Teal', trim:'#d8b35a', price:209, desc:'A teal silk blend with a subtle sheen and a cross-over front. Made for sangeet nights.', out:['XS']},
-  {id:'black-straight', name:'Black embroidered sherwani', cat:'Indo western', type:'indo', c:'#1d1c21', cn:'Black', trim:'#d8b35a', straight:true, price:249, desc:'A straight-front black jacket with gold embroidery running down both sides of the placket.', out:[]},
-  {id:'peach-asym', name:'Peach asymmetric', cat:'Indo western', type:'indo', c:'#e9b9a0', cn:'Peach', trim:'#a8793a', price:199, desc:'A soft peach jacket with an angled closure and antique-gold buttons. Light enough for a day wedding.', out:['S']},
-  {id:'royal-straight', name:'Royal blue Indo western', cat:'Indo western', type:'indo', c:'#26408f', cn:'Royal blue', trim:'#d8b35a', straight:true, price:229, desc:'Royal blue silk with a straight front and gold work along the placket and hem.', out:[]},
-  {id:'mint-asym', name:'Mint brocade jacket', cat:'Indo western', type:'indo', c:'#a7cbb8', cn:'Mint', trim:'#b8933f', price:215, desc:'A pale mint brocade with an angled front. Fresh for summer functions and mehendi mornings.', out:['XL']},
-  {id:'wine-straight', name:'Wine velvet Indo western', cat:'Indo western', type:'indo', c:'#5a1a2a', cn:'Wine', trim:'#d8b35a', straight:true, price:259, desc:'Deep wine velvet, cut long and straight, with fine gold embroidery. One for the reception.', out:[]},
-  {id:'grey-asym', name:'Slate asymmetric', cat:'Indo western', type:'indo', c:'#5b5e66', cn:'Slate', trim:'#c9ccd1', price:205, desc:'Slate grey suiting with silver-toned buttons and an angled front. Understated but festive.', out:['XS']},
-  {id:'gold-straight', name:'Gold silk Indo western', cat:'Indo western', type:'indo', c:'#c9a45c', cn:'Gold', trim:'#6e1f2c', straight:true, price:269, desc:'Gold silk with maroon detailing along the placket and hem. Made for the groom or his brother.', out:[]},
+  {id:'ivory-asym', name:'Ivory asymmetric', cat:'Indo western', type:'indo', c:'#ece3cf', cn:'Ivory', price:199, desc:'A long Indo-western jacket with an angled front closure and fine gold work along the placket and hem.', out:[]},
+  {id:'maroon-zari', name:'Maroon zari jacket', cat:'Indo western', type:'indo', c:'#6e1f2c', cn:'Maroon', price:219, desc:'Rich maroon raw silk with zari detailing on the mandarin collar. Cut long with side slits for easy movement.', out:['XL']},
+  {id:'teal-silk', name:'Teal silk Indo western', cat:'Indo western', type:'indo', c:'#1f5f63', cn:'Teal', price:209, desc:'A teal silk blend with a subtle sheen and a cross-over front. Made for sangeet nights.', out:['XS']},
+  {id:'black-straight', name:'Black embroidered sherwani', cat:'Indo western', type:'indo', c:'#1d1c21', cn:'Black', price:249, desc:'A straight-front black jacket with gold embroidery running down both sides of the placket.', out:[]},
+  {id:'peach-asym', name:'Peach asymmetric', cat:'Indo western', type:'indo', c:'#e9b9a0', cn:'Peach', price:199, desc:'A soft peach jacket with an angled closure and antique-gold buttons. Light enough for a day wedding.', out:['S']},
+  {id:'royal-straight', name:'Royal blue Indo western', cat:'Indo western', type:'indo', c:'#26408f', cn:'Royal blue', price:229, desc:'Royal blue silk with a straight front and gold work along the placket and hem.', out:[]},
+  {id:'mint-asym', name:'Mint brocade jacket', cat:'Indo western', type:'indo', c:'#a7cbb8', cn:'Mint', price:215, desc:'A pale mint brocade with an angled front. Fresh for summer functions and mehendi mornings.', out:['XL']},
+  {id:'wine-straight', name:'Wine velvet Indo western', cat:'Indo western', type:'indo', c:'#5a1a2a', cn:'Wine', price:259, desc:'Deep wine velvet, cut long and straight, with fine gold embroidery. One for the reception.', out:[]},
+  {id:'grey-asym', name:'Slate asymmetric', cat:'Indo western', type:'indo', c:'#5b5e66', cn:'Slate', price:205, desc:'Slate grey suiting with silver-toned buttons and an angled front. Understated but festive.', out:['XS']},
+  {id:'gold-straight', name:'Gold silk Indo western', cat:'Indo western', type:'indo', c:'#c9a45c', cn:'Gold', price:269, desc:'Gold silk with maroon detailing along the placket and hem. Made for the groom or his brother.', out:[]},
   // Jodhpuri
-  {id:'royal-bandh', name:'Royal blue bandhgala', cat:'Jodhpuri', type:'jodh', c:'#26408f', cn:'Royal blue', trim:'#d8b35a', price:189, desc:'A classic closed-neck Jodhpuri in royal blue suiting, with a row of gold buttons and a short mandarin collar.', out:[]},
-  {id:'beige-bandh', name:'Beige Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#d8c7a6', cn:'Beige', trim:'#7a5a2a', price:179, desc:'Light beige linen-wool that works for daytime ceremonies. Antique bronze buttons down the front.', out:['XL']},
-  {id:'black-velvet', name:'Black velvet Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#1d1c21', cn:'Black velvet', trim:'#d8b35a', pipe:true, price:239, desc:'Plush black velvet with gold piping along the front edge. The one for the reception.', out:['S']},
-  {id:'ivory-bandh', name:'Ivory bandhgala', cat:'Jodhpuri', type:'jodh', c:'#efe9dc', cn:'Ivory', trim:'#b8933f', price:199, desc:'An ivory bandhgala in fine suiting with gold buttons. Pair it with ivory trousers and a pocket square.', out:[]},
-  {id:'maroon-bandh', name:'Maroon Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#6e1f2c', cn:'Maroon', trim:'#d8b35a', pipe:true, price:219, desc:'Deep maroon with gold piping down the front and around the collar. Rich, warm and very festive.', out:[]},
-  {id:'charcoal-bandh', name:'Charcoal bandhgala', cat:'Jodhpuri', type:'jodh', c:'#3a3c42', cn:'Charcoal', trim:'#c9ccd1', price:185, desc:'Charcoal wool with silver-toned buttons. Smart enough for evening events, simple enough for the office.', out:['XS']},
-  {id:'emerald-bandh', name:'Emerald Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#1f6b4a', cn:'Emerald', trim:'#d8b35a', price:209, desc:'Jewel-toned emerald suiting with gold buttons and a short mandarin collar.', out:[]},
-  {id:'navy-check-bandh', name:'Navy check bandhgala', cat:'Jodhpuri', type:'jodh', c:'#22305a', cn:'Navy check', trim:'#c9ccd1', check:true, price:205, desc:'A navy Jodhpuri with a faint check and silver buttons. A modern take on the classic.', out:['XL']},
-  {id:'mustard-bandh', name:'Mustard Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#c49a3a', cn:'Mustard', trim:'#5a3a1a', price:195, desc:'Mustard raw silk with dark bronze buttons. Bright and easy to wear for haldi and daytime functions.', out:[]},
-  {id:'white-bandh', name:'White linen Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#f3f2ee', cn:'White', trim:'#3346b0', pipe:true, price:175, desc:'Crisp white linen with indigo piping and buttons. Cool for summer and sharp in photos.', out:['S']},
+  {id:'royal-bandh', name:'Royal blue bandhgala', cat:'Jodhpuri', type:'jodh', c:'#26408f', cn:'Royal blue', price:189, desc:'A classic closed-neck Jodhpuri in royal blue suiting, with a row of gold buttons and a short mandarin collar.', out:[]},
+  {id:'beige-bandh', name:'Beige Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#d8c7a6', cn:'Beige', price:179, desc:'Light beige linen-wool that works for daytime ceremonies. Antique bronze buttons down the front.', out:['XL']},
+  {id:'black-velvet', name:'Black velvet Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#1d1c21', cn:'Black velvet', price:239, desc:'Plush black velvet with gold piping along the front edge. The one for the reception.', out:['S']},
+  {id:'ivory-bandh', name:'Ivory bandhgala', cat:'Jodhpuri', type:'jodh', c:'#efe9dc', cn:'Ivory', price:199, desc:'An ivory bandhgala in fine suiting with gold buttons. Pair it with ivory trousers and a pocket square.', out:[]},
+  {id:'maroon-bandh', name:'Maroon Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#6e1f2c', cn:'Maroon', price:219, desc:'Deep maroon with gold piping down the front and around the collar. Rich, warm and very festive.', out:[]},
+  {id:'charcoal-bandh', name:'Charcoal bandhgala', cat:'Jodhpuri', type:'jodh', c:'#3a3c42', cn:'Charcoal', price:185, desc:'Charcoal wool with silver-toned buttons. Smart enough for evening events, simple enough for the office.', out:['XS']},
+  {id:'emerald-bandh', name:'Emerald Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#1f6b4a', cn:'Emerald', price:209, desc:'Jewel-toned emerald suiting with gold buttons and a short mandarin collar.', out:[]},
+  {id:'navy-check-bandh', name:'Navy check bandhgala', cat:'Jodhpuri', type:'jodh', c:'#22305a', cn:'Navy check', price:205, desc:'A navy Jodhpuri with a faint check and silver buttons. A modern take on the classic.', out:['XL']},
+  {id:'mustard-bandh', name:'Mustard Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#c49a3a', cn:'Mustard', price:195, desc:'Mustard raw silk with dark bronze buttons. Bright and easy to wear for haldi and daytime functions.', out:[]},
+  {id:'white-bandh', name:'White linen Jodhpuri', cat:'Jodhpuri', type:'jodh', c:'#f3f2ee', cn:'White', price:175, desc:'Crisp white linen with indigo piping and buttons. Cool for summer and sharp in photos.', out:['S']},
 ];
 const SIZES = ['XS','S','M','L','XL'];
 
 /* ================= garment drawing ================= */
 let uid = 0;
-const BODY = {
-  blazer:'M70 20 L100 28 L130 20 L170 32 Q184 50 188 120 L194 206 L172 209 L159 108 L160 212 Q100 218 40 212 L41 108 L28 209 L6 206 L12 120 Q16 50 30 32 Z',
-  indo:'M72 20 L100 28 L128 20 L168 32 Q182 50 186 120 L192 206 L170 209 L159 108 L162 224 Q100 230 38 224 L41 108 L30 209 L8 206 L14 120 Q18 50 32 32 Z'
-};
-BODY.casual = BODY.blazer; BODY.formal = BODY.blazer; BODY.jodh = BODY.blazer;
-function dark(hex){ const n=parseInt(hex.slice(1),16); return ((n>>16)*.3+((n>>8)&255)*.59+(n&255)*.11) < 110; }
 function shadeHex(hex, amt){ let n=parseInt(hex.slice(1),16), r=n>>16, g=(n>>8)&255, b=n&255;
   const f=v=>Math.max(0,Math.min(255,Math.round(v+amt))); return '#'+((1<<24)+(f(r)<<16)+(f(g)<<8)+f(b)).toString(16).slice(1); }
-const btn = (x,y,fill,r=3.4) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="rgba(0,0,0,.25)" stroke-width=".8"/>`;
-
-function garment(p, face='front', hanger=true){
-  const id = 'g'+(uid++), d = BODY[p.type], dk = dark(p.c);
-  const line = dk ? 'rgba(255,255,255,.10)' : 'rgba(0,0,0,.10)', deep = shadeHex(p.c,dk?-14:-28);
-  const edge = dk ? 'rgba(255,255,255,.22)' : 'rgba(0,0,0,.22)', trim = p.trim || deep;
-  const lapelled = p.type==='casual' || p.type==='formal';
-  let s = `<svg viewBox="-10 -30 220 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
-    <linearGradient id="${id}s" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
-    <linearGradient id="${id}w" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b8653f"/><stop offset="1" stop-color="#7d3a20"/></linearGradient>
-    <clipPath id="${id}c"><path d="${d}"/></clipPath>
-    <pattern id="${id}k" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 .5 H16 M.5 0 V16" stroke="${dk?'rgba(255,255,255,.14)':'rgba(0,0,0,.12)'}" stroke-width="1.2"/></pattern></defs>`;
-  if(hanger) s += `<path d="M100 18 V2 Q100 -16 113 -16 Q123 -16 121 -6" fill="none" stroke="#6f6f68" stroke-width="2.6" stroke-linecap="round"/>
-    <path d="M42 34 Q100 10 158 34" fill="none" stroke="url(#${id}w)" stroke-width="7" stroke-linecap="round"/>`;
-  s += `<path d="${d}" fill="${p.c}"/>`;
-  s += `<g clip-path="url(#${id}c)">`;
-  if(p.check) s += `<path d="${d}" fill="url(#${id}k)"/>`;
-  // folds and cuffs
-  s += `<path d="M66 80 Q72 150 64 214 M134 80 Q128 150 136 214" stroke="${line}" stroke-width="2" fill="none"/>
-        <path d="M8 194 L29 197 M171 197 L192 194" stroke="${deep}" stroke-width="2"/>`;
-  if(face==='front'){
-    if(lapelled){
-      const formal = p.type==='formal', tux = p.tie==='bow';
-      s += `<path d="M78 20 L100 116 L122 20 Z" fill="${p.inner}"/>`;
-      if(formal){
-        s += `<path d="M86 20 L100 34 L114 20" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>`;
-        s += tux ? `<path d="M89 30 L100 35 L111 30 L111 42 L100 37 L89 42 Z" fill="#141416"/>`
-                 : `<path d="M97 32 L103 32 L105 40 L103.5 82 L100 88 L96.5 82 L95 40 Z" fill="${p.tieC}"/>`;
-      }
-      // lapels: notch for casual, peak for formal
-      const L = formal ? 'M78 20 L66 30 L50 46 L70 60 L100 116 Z' : 'M78 20 L66 30 L60 56 L70 60 L100 116 Z';
-      const lap = p.lapel || deep;
-      s += `<path d="${L}" fill="${lap}" stroke="${edge}" stroke-width="1"/><path d="${L}" transform="translate(200 0) scale(-1 1)" fill="${lap}" stroke="${edge}" stroke-width="1"/>`;
-      s += `<path d="M66 30 L70 46 M134 30 L130 46" stroke="${edge}" stroke-width="1.2"/>`;
-      if(p.dbl){
-        s += `<path d="M100 116 L118 128 V214" stroke="${edge}" stroke-width="1.4" fill="none"/>`;
-        s += [128,150,172].map(y=>btn(84,y,deep)+btn(116,y,deep)).join('');
-      } else {
-        s += `<path d="M100 116 V214" stroke="${edge}" stroke-width="1.4"/>`;
-        s += ({1:[126],2:[126,152],3:[110,132,154]}[p.btns || (tux?1:2)]).map(y=>btn(100,y,deep)).join('');
-      }
-      if((p.pocket || (formal?'flap':'patch'))==='flap'){
-        s += `<path d="M48 152 h38 v8 h-38z M114 152 h38 v8 h-38z M116 82 L142 78 v5 L116 87 z" fill="${deep}" stroke="${edge}" stroke-width=".8"/>
-              ${p.sq?`<path d="M119 82 L124 72 L130 79 L136 71 L140 79 Z" fill="${p.sq}"/>`:''}`;
-      } else {
-        s += `<rect x="50" y="146" width="36" height="32" rx="5" fill="none" stroke="${deep}" stroke-width="2.2"/><rect x="114" y="146" width="36" height="32" rx="5" fill="none" stroke="${deep}" stroke-width="2.2"/>
-              <path d="M116 84 L142 80" stroke="${deep}" stroke-width="3"/>`;
-      }
-    }
-    if(p.type==='jodh'){
-      s += `<path d="M100 28 V214" stroke="${p.pipe?trim:edge}" stroke-width="${p.pipe?2:1.4}"/>`;
-      s += [46,72,98,124,150,176].map(y=>btn(100,y,trim,3.2)).join('');
-      s += `<path d="M116 82 L142 78 v5 L116 87 z M48 156 h38 v7 h-38z M114 156 h38 v7 h-38z" fill="${deep}" stroke="${edge}" stroke-width=".8"/>`;
-    }
-    if(p.type==='indo' && p.straight){
-      s += `<path d="M100 28 V230" stroke="${edge}" stroke-width="1.6"/>
-            <path d="M94 30 V230 M106 30 V230" stroke="${trim}" stroke-width="2.4" stroke-dasharray="1 5" stroke-linecap="round"/>`;
-      s += [44,66,88,110,132,154,176].map(y=>btn(100,y,trim,2.8)).join('');
-      s += `<path d="M42 196 V230 M158 196 V230" stroke="${deep}" stroke-width="2"/>`;
-    } else if(p.type==='indo'){
-      s += `<path d="M108 28 Q124 56 126 100 L126 230" stroke="${edge}" stroke-width="1.6" fill="none"/>
-            <path d="M112 30 Q128 58 130 100 L130 230" stroke="${trim}" stroke-width="2.4" stroke-dasharray="1 5" stroke-linecap="round" fill="none"/>`;
-      s += [[113,42],[120,60],[124,80],[126,104],[126,130],[126,156],[126,182]].map(([x,y])=>btn(x,y,trim,3)).join('');
-      s += `<path d="M42 196 V230 M158 196 V230" stroke="${deep}" stroke-width="2"/>`;
-    }
-  } else {
-    s += `<path d="M100 28 V214" stroke="${edge}" stroke-width="1.2"/>`;
-    if(lapelled) s += `<path d="M100 178 V214" stroke="${deep}" stroke-width="2.4"/><path d="M74 20 Q100 30 126 20" stroke="${deep}" stroke-width="6" fill="none"/>`;
-    if(p.type==='indo') s += `<path d="M42 196 V230 M158 196 V230" stroke="${deep}" stroke-width="2"/>`;
-  }
-  if(p.type==='indo') s += `<path d="M38 218 Q100 225 162 218" stroke="${trim}" stroke-width="3" stroke-dasharray="1 5" stroke-linecap="round" fill="none"/>`;
-  s += `<path d="${d}" fill="url(#${id}s)"/></g>`;
-  // mandarin collar
-  if(p.type==='jodh' || p.type==='indo'){
-    s += `<path d="M74 18 Q100 26 126 18 L125 27 Q100 35 75 27 Z" fill="${deep}" stroke="${p.type==='indo'||p.pipe?trim:edge}" stroke-width="1.2"/>`;
-    if(face==='front') s += `<path d="M${p.type==='indo'&&!p.straight?108:100} 25 V34" stroke="${edge}" stroke-width="1.4"/>`;
-  }
-  return s + '</svg>';
+function garment(p, face='front'){
+  return `<img src="images/${p.id}${face==='back'?'-back':''}.webp" alt="" draggable="false" loading="lazy" width="640" height="800">`;
 }
 function sideView(p){
   const id='g'+(uid++), deep=shadeHex(p.c,-30), h = p.type==='indo' ? 226 : 212;
@@ -659,7 +577,6 @@ function sideView(p){
     <path d="M12 22 Q20 17 28 22 L31 70 L34 ${h} Q20 ${h+5} 6 ${h} L9 70 Z" fill="url(#${id})"/>
     ${collar?`<rect x="13" y="16" width="14" height="8" rx="2" fill="${deep}"/>`:''}
     <path d="M26 30 Q32 110 29 ${h-16}" stroke="rgba(0,0,0,.18)" stroke-width="2" fill="none"/>
-    ${p.trim?`<path d="M14 40 V${h-6}" stroke="${p.trim}" stroke-width="1.6" stroke-dasharray="1 5" stroke-linecap="round"/>`:''}
   </svg>`;
 }
 
@@ -816,8 +733,8 @@ function renderPDP(i){
   const preset=pendingSize; pendingSize=null;
   pIdx=i; const p=P[i]; pFace='front';
   $('#pCat').textContent=p.cat; $('#pCatC').textContent=p.name; $('#pName').textContent=p.name; $('#pPrice').textContent=usd(p.price); $('#pDesc').textContent=p.desc;
-  $('#pPic').innerHTML=garment(p,'front',false); $('#pMain').classList.remove('zoom');
-  $('#pThumbs').innerHTML=['front','back'].map(f=>`<button data-f="${f}" aria-pressed="${f==='front'}" aria-label="${f} view">${garment(p,f,false)}</button>`).join('');
+  $('#pPic').innerHTML=garment(p,'front'); $('#pMain').classList.remove('zoom');
+  $('#pThumbs').innerHTML=['front','back'].map(f=>`<button data-f="${f}" aria-pressed="${f==='front'}" aria-label="${f} view">${garment(p,f)}</button>`).join('');
   $('#pThumbs').querySelectorAll('button').forEach(b=>b.onclick=()=>setFace(b.dataset.f));
   $('#pSize').innerHTML='<option value="">Choose an option</option>'+SIZES.map(s=>`<option value="${s}" ${p.out.includes(s)?'disabled':''}>${s}${p.out.includes(s)?' (sold out)':''}</option>`).join('');
   $('#pSize').value=preset||''; $('#pQty').value=1; updateBuy();
@@ -826,7 +743,7 @@ function renderPDP(i){
 function setFace(f){
   if(f===pFace) return; pFace=f; const pic=$('#pPic');
   $('#pThumbs').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));
-  pic.classList.add('fade'); setTimeout(()=>{pic.innerHTML=garment(P[pIdx],f,false); pic.classList.remove('fade');},220);
+  pic.classList.add('fade'); setTimeout(()=>{pic.innerHTML=garment(P[pIdx],f); pic.classList.remove('fade');},220);
 }
 $('#pMain').addEventListener('click',e=>{
   const m=$('#pMain'), r=m.getBoundingClientRect();
@@ -896,7 +813,7 @@ function renderCart(bump){
   b.textContent=t.count; b.classList.toggle('on',t.count>0); if(bump&&t.count) retrigger(b,'pop');
   const body=$('#cartBody');
   if(!cart.length){ body.innerHTML='<div class="empty">Your bag is empty.<br><button id="emptyGo">Browse the rail</button></div>'; $('#emptyGo').onclick=()=>{ go('rack'); setMode('rail'); }; }
-  else body.innerHTML=cart.map((l,k)=>{const p=prod(l.id); return `<div class="line"><div class="th">${garment(p,'front',false)}</div><div><div class="ln">${p.name}</div><div class="lm">Size ${l.size}, ${usd(p.price)}</div><div class="lq"><button data-k="${k}" data-d="-1" aria-label="Decrease">−</button>${l.qty}<button data-k="${k}" data-d="1" aria-label="Increase">+</button></div></div><button class="rm" data-rm="${k}">Remove</button></div>`}).join('');
+  else body.innerHTML=cart.map((l,k)=>{const p=prod(l.id); return `<div class="line"><div class="th">${garment(p,'front')}</div><div><div class="ln">${p.name}</div><div class="lm">Size ${l.size}, ${usd(p.price)}</div><div class="lq"><button data-k="${k}" data-d="-1" aria-label="Decrease">−</button>${l.qty}<button data-k="${k}" data-d="1" aria-label="Increase">+</button></div></div><button class="rm" data-rm="${k}">Remove</button></div>`}).join('');
   body.querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>changeQty(+x.dataset.k,+x.dataset.d));
   body.querySelectorAll('[data-rm]').forEach(x=>x.onclick=()=>removeLine(+x.dataset.rm));
   $('#subtotal').textContent=usd(t.after);
@@ -919,7 +836,7 @@ function renderCartPage(){
   el.innerHTML=`<div class="cgrid"><div>
     <div class="chead"><span>Product</span><span>Quantity</span><span>Total</span></div>
     ${cart.map((l,k)=>{const p=prod(l.id); return `<div class="crow" data-row="${k}">
-      <button class="th" data-open="${p.id}" aria-label="View ${p.name}">${garment(p,'front',false)}</button>
+      <button class="th" data-open="${p.id}" aria-label="View ${p.name}">${garment(p,'front')}</button>
       <div><button class="cn" data-open="${p.id}">${p.name}</button><div class="cm">Size ${l.size}, ${p.cn}</div><div class="cm">${usd(p.price)} each</div><button class="rm" data-rm="${k}">Remove</button></div>
       <div class="stepper"><button data-k="${k}" data-d="-1" aria-label="Decrease">−</button><span>${l.qty}</span><button data-k="${k}" data-d="1" aria-label="Increase">+</button></div>
       <div class="ct">${usd(l.qty*p.price)}</div></div>`}).join('')}
@@ -1063,7 +980,7 @@ function renderSummary(){
   $('#ship-courier-sub').textContent='Arrives by '+bizDays(4);
   $('#ship-express-sub').textContent='Arrives '+bizDays(1);
   $('#coSummary').innerHTML=`<h2>Order summary <button class="edit" id="editBag">Edit bag</button></h2>
-    <div class="slist">${cart.map(l=>{const p=prod(l.id); return `<div class="sline"><div class="th">${garment(p,'front',false)}<span class="q">${l.qty}</span></div><div><b>${p.name}</b><span class="cm">Size ${l.size}</span></div><span>${usd(l.qty*p.price)}</span></div>`}).join('')}</div>
+    <div class="slist">${cart.map(l=>{const p=prod(l.id); return `<div class="sline"><div class="th">${garment(p,'front')}<span class="q">${l.qty}</span></div><div><b>${p.name}</b><span class="cm">Size ${l.size}</span></div><span>${usd(l.qty*p.price)}</span></div>`}).join('')}</div>
     ${coupon?`<div class="cm" style="margin-bottom:6px">Code ${COUPONS[coupon].label}</div>`:''}
     ${trows(t,SHIP[shipMethod])}`;
   $('#editBag').onclick=()=>go('cart');
@@ -1122,7 +1039,7 @@ function renderDone(){
     <h1 class="ptitle">Thanks, ${esc(c.fname)}. Your order is in.</h1>
     <p class="cm">Order <b>${o.no}</b>. A confirmation is on its way to ${esc(c.email)}.</p>
     <div class="receipt">
-      ${o.items.map(i=>{const p=prod(i.id); return `<div class="sline"><div class="th">${garment(p,'front',false)}<span class="q">${i.qty}</span></div><div><b>${esc(i.name)}</b><span class="cm">Size ${i.size}</span></div><span>${usd(i.qty*i.price)}</span></div>`}).join('')}
+      ${o.items.map(i=>{const p=prod(i.id); return `<div class="sline"><div class="th">${garment(p,'front')}<span class="q">${i.qty}</span></div><div><b>${esc(i.name)}</b><span class="cm">Size ${i.size}</span></div><span>${usd(i.qty*i.price)}</span></div>`}).join('')}
       <div style="margin-top:10px">${trows(o.totals,SHIP[o.ship])}</div>
       <div class="rgrid">
         <div><h3>${SHIP[o.ship]}</h3><p>${where}</p>${o.eta?`<p style="margin-top:6px">Expected ${o.eta}</p>`:''}</div>
